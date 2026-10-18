@@ -142,7 +142,7 @@ function orbit(host){
   g.strokeStyle='#8cc63f'; g.lineWidth=10; g.beginPath(); g.arc(512,512,430,0,7); g.stroke(); g.lineWidth=3; g.setLineDash([14,14]); g.beginPath(); g.arc(512,512,470,0,7); g.stroke(); g.setLineDash([]);
   g.fillStyle='#1a211d'; g.textAlign='center'; g.font='800 230px Manrope, system-ui, sans-serif'; g.fillText('42.5',490,560); g.fillStyle='#8cc63f'; g.font='800 120px Manrope, system-ui'; g.fillText('N',742,470);
   g.fillStyle='#7a6a48'; g.font='700 56px Manrope, system-ui'; g.fillText('ES 4756-1 · CEM I',512,680);
-  const ctex=new T.CanvasTexture(c);ctex.center.set(.5,.5);ctex.rotation=-Math.PI/2;
+  const ctex=new T.CanvasTexture(c);ctex.center.set(.5,.5);ctex.rotation=Math.PI/2;
   const disc=new T.Mesh(new T.CylinderGeometry(1.3,1.35,.08,96),[new T.MeshStandardMaterial({color:0xe9e2d2,roughness:.6}),new T.MeshStandardMaterial({map:ctex,roughness:.55,metalness:.05}),new T.MeshStandardMaterial({color:0xd6ccb6})]);
   disc.material[1].map.colorSpace=T.SRGBColorSpace; disc.position.y=.04; disc.receiveShadow=true; sc.add(disc);
   const glow=new T.Mesh(new T.TorusGeometry(1.32,.012,12,160),new T.MeshBasicMaterial({color:0x8cc63f})); glow.rotation.x=Math.PI/2; glow.position.y=.085; sc.add(glow);

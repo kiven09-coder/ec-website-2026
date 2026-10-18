@@ -6,8 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Egyptian Cement — 2026</title>
 <meta name="description" content="Egyptian Cement — Egypt's newest integrated cement plant in Sohag. Products, plant, sustainability, careers and contact.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/fonts.css">
 <style>
 :root{
   --ink:#0E1411;   --ink2:#161E1A;  --ink3:#212B26;  --line:#2C3832;
@@ -964,13 +963,383 @@ html[dir=rtl] .spot .nv svg{transform:scaleX(-1)}
 #map .clbl{font-size:28px;stroke-width:8px}#map .eglbl{font-size:34px}#map .sea{display:none}
 .spot .nv{top:24px;bottom:auto}.spot .nv.p{inset-inline-start:24px}.spot .nv.n{inset-inline-start:84px}.spot .ss b{font-size:.92rem}.spot .ss div{padding:10px}.spot .sg{margin:14px 0 4px}.spot .hint{justify-content:center}}
 html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
+
+/* ===== v10: before / after flip ===== */
+.ba{margin-top:110px}
+.bahead{max-width:720px;margin-bottom:34px}
+.bahead h3{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;margin:12px 0 10px;line-height:1.25}
+.bahead p{color:#9AA49D}
+.bagrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.bac{margin:0;perspective:1400px;cursor:pointer;outline:none}
+.bac .flip{position:relative;aspect-ratio:4/3;transform-style:preserve-3d;transition:transform 1.15s cubic-bezier(.65,0,.25,1);border-radius:var(--r)}
+.bac.af .flip{transform:rotateY(180deg)}
+.bac .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);overflow:hidden;background:#1b231f;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.bac .fa{transform:rotateY(180deg)}
+.bac img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s linear}
+.bac .fb img{filter:saturate(.85) sepia(.12)}
+.bac:hover img{transform:scale(1.05)}
+.bac .tg{position:absolute;top:12px;inset-inline-start:12px;font-size:.8rem;font-weight:600;padding:5px 12px;border-radius:30px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.bac .tb{background:rgba(201,163,92,.9);color:#16120a}
+.bac .ta{background:rgba(140,198,63,.92);color:#0E1411}
+.bac figcaption{margin-top:12px;font-weight:600;font-size:1rem;display:flex;align-items:center;gap:8px}
+.bac figcaption:before{content:"";width:18px;height:2px;background:var(--lime);display:inline-block}
+.bac:focus-visible .flip{outline:2px solid var(--lime);outline-offset:4px}
+@media (max-width:1000px){.bagrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.bagrid{gap:10px}.bac figcaption{font-size:.85rem}.bac .tg{font-size:.7rem;padding:4px 9px;top:8px;inset-inline-start:8px}.ba{margin-top:80px}}
+@media (prefers-reduced-motion:reduce){.bac .flip{transition:none}.bac img{transition:none}}
+/* ===== v11: 3D viewer ===== */
+html.v3lock{overflow:hidden}
+.v3d{position:fixed;inset:0;z-index:200;display:grid;place-items:center;pointer-events:none;opacity:0;transition:opacity .45s var(--ease)}
+.v3d.on{opacity:1;pointer-events:auto}
+.v3bg{position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 40%,rgba(30,38,33,.86),rgba(8,11,9,.96));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.v3in{position:relative;width:min(1180px,94vw);height:min(720px,90vh);display:grid;grid-template-columns:1.15fr .85fr;border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#fbf9f4,#ece6d9);box-shadow:0 40px 120px rgba(0,0,0,.55);transform:translateY(24px) scale(.97);transition:transform .6s var(--ease)}
+.v3d.on .v3in{transform:none}
+.v3stage{position:relative;background:radial-gradient(70% 60% at 50% 45%,#fff,#f0ebdf 55%,#e1d8c4);overflow:hidden}
+.v3stage:before{content:"";position:absolute;inset:auto 0 0;height:38%;background:linear-gradient(transparent,rgba(120,100,60,.08))}
+.v3stage canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none}
+.v3stage canvas:active{cursor:grabbing}
+.v3hint{position:absolute;top:18px;inset-inline-start:18px;display:flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:#6b5d40;background:rgba(255,255,255,.75);padding:7px 12px;border-radius:30px}
+.v3nav{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px}
+.v3nav>button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:#fff;font-size:1.5rem;line-height:1;cursor:pointer;color:#1a211d}
+.v3dots{display:flex;gap:7px}.v3dots button{width:9px;height:9px;border-radius:50%;border:0;background:rgba(0,0,0,.18);cursor:pointer;padding:0;transition:.3s}
+.v3dots button.on{background:var(--bc,#8cc63f);width:24px;border-radius:6px}
+.v3info{padding:38px 36px 30px;overflow:auto;color:#1a211d;background:#fff}
+.v3info.sw>*{animation:v3in .6s var(--ease) both}.v3info.sw>*:nth-child(2){animation-delay:.05s}.v3info.sw>*:nth-child(3){animation-delay:.1s}.v3info.sw>*:nth-child(4){animation-delay:.15s}
+@keyframes v3in{from{opacity:0;transform:translateY(12px)}}
+.v3tag{display:inline-block;font:700 .72rem "Manrope",system-ui;letter-spacing:.16em;color:#fff;background:var(--bc,#2f3f9a);padding:5px 11px;border-radius:20px}
+.v3name{font-size:2rem;font-weight:700;margin:12px 0 4px;line-height:1.2}
+.v3grade{display:flex;align-items:baseline;gap:6px;justify-content:flex-end}
+html[dir=ltr] .v3grade{justify-content:flex-start}
+.v3grade b{font:800 2.6rem/1 "Manrope",system-ui;letter-spacing:-.04em}.v3grade em{font:800 1.1rem "Manrope";color:var(--lime);font-style:normal}.v3grade small{font:700 .78rem "Manrope";color:var(--mute);letter-spacing:.08em;margin-inline-start:8px}
+.v3d1{color:#4b544e;margin:12px 0 4px;line-height:1.7}
+.v3info h4{font-size:.82rem;letter-spacing:.06em;color:var(--brass);margin:20px 0 8px;font-weight:700}
+.v3info ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.v3info li{font-size:.85rem;background:#f4f1ea;border:1px solid #e6e0d2;padding:5px 11px;border-radius:20px}
+.v3adv li{background:rgba(140,198,63,.12);border-color:rgba(140,198,63,.35)}
+.v3spec{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e6e0d2;border:1px solid #e6e0d2;border-radius:10px;overflow:hidden}
+.v3spec div{background:#fff;padding:9px 12px;display:flex;flex-direction:column;gap:2px}.v3spec span{font-size:.75rem;color:var(--mute)}.v3spec b{font:700 .95rem "Manrope",system-ui}
+html[dir=rtl] .v3spec b{text-align:right}
+.v3pk{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.v3pk div{border:1px solid #e6e0d2;border-radius:10px;padding:10px;text-align:center}.v3pk b{display:block;font:800 1rem "Manrope"}.v3pk span{font-size:.75rem;color:var(--mute)}
+.v3act{margin-top:20px}
+.v3x{position:absolute;top:14px;inset-inline-end:14px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(26,33,29,.85);color:#fff;font-size:1.1rem;cursor:pointer;z-index:3}
+@media (max-width:860px){.v3in{grid-template-columns:1fr;grid-template-rows:52vh 1fr;height:94vh;width:96vw}.v3info{padding:24px 20px}.v3name{font-size:1.5rem}}
+/* quality orbit canvas */
+.q3x{position:relative;height:540px;aspect-ratio:auto!important;width:100%;min-width:0;border-radius:16px;overflow:hidden;background:radial-gradient(70% 60% at 50% 42%,#fffdf6,#ece6d8 60%,#dcd3c0)}
+.q3x .q3cv{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y}
+.q3x .qhint{white-space:nowrap;position:absolute;top:18px;inset-inline-end:18px;font:700 .7rem "Manrope";letter-spacing:.14em;color:#7a6a48;background:rgba(255,255,255,.75);padding:6px 10px;border-radius:20px;z-index:2}
+.q3x .qtag{z-index:2}
+@media (max-width:700px){.q3x{height:420px}}
+
+/* ===== v11: 3D logo ===== */
+.brand{perspective:420px}
+.lg3d{position:relative;width:44px;height:53px;display:inline-block;flex:none}
+.lgc{position:absolute;inset:0;transform-style:preserve-3d;animation:lgspin 9s cubic-bezier(.6,0,.2,1) infinite;will-change:transform}
+.lg3d svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:translateZ(calc(var(--z)*1px - 9px))}
+.lg3d svg.lt{transform:translateZ(calc(var(--z)*1px + 1px))}
+.lg3d svg g{stroke:#3c6418;fill:#3c6418}
+.lg3d svg.lf g{stroke:url(#lggr);fill:url(#lggr)}
+.lg3d svg.lf.lt g{stroke:#c9ec8f;fill:#c9ec8f}
+.lg3d svg.lf{filter:drop-shadow(0 0 4px rgba(140,198,63,.45))}
+.lg3d .lgs{position:absolute;inset:-4px;transform:translateZ(13px);background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.75) 46%,transparent 58%);mix-blend-mode:overlay;-webkit-mask:radial-gradient(circle at 50% 42%,#000 58%,transparent 60%);mask:radial-gradient(circle at 50% 42%,#000 58%,transparent 60%);background-size:260% 100%;animation:lgsh 9s linear infinite}
+@keyframes lgspin{0%{transform:rotateY(-22deg) rotateX(8deg)}30%{transform:rotateY(22deg) rotateX(-4deg)}55%{transform:rotateY(-14deg) rotateX(6deg)}70%{transform:rotateY(0) rotateX(0)}88%,100%{transform:rotateY(360deg) rotateX(0)}}
+@keyframes lgsh{0%,60%{background-position:120% 0}85%,100%{background-position:-60% 0}}
+.brand:hover .lgc{animation-duration:3s}
+@media (prefers-reduced-motion:reduce){.lgc,.lg3d .lgs{animation:none}}
+/* ===== v11: hero ===== */
+.hero .eyebrow{font-size:1.04rem;gap:12px}.hero .eyebrow i{width:9px;height:9px}
+.hero h1.bigname .mask:not(.sub)>span{color:#E3E7E3;text-shadow:0 1px 0 #c3cac5,0 2px 0 #b3bbb5,0 3px 0 #a5ada7,0 4px 0 #959e98,0 5px 0 #868f89,0 7px 6px rgba(0,0,0,.35),0 16px 34px rgba(0,0,0,.45)}
+.hero h1.bigname .mask:not(.sub){padding-bottom:.3em}
+.bigname .mask.sub>span.subrow{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hspec{display:inline-flex;flex-direction:column;align-items:flex-end;font-size:16px;letter-spacing:0;line-height:1}
+html[dir=ltr] .hspec{align-items:flex-start}
+.hspec .hk{font-size:.86rem;font-weight:600;color:var(--brass2);letter-spacing:.04em;opacity:0;transition:opacity .8s 1.2s}
+.hspec .hk b{font:700 .84rem "Manrope",system-ui;color:#fff;opacity:.85;letter-spacing:.08em}
+.hspec .hn{display:flex;align-items:flex-start;font:800 clamp(2.8rem,4.6vw,4.4rem)/1 "Manrope",system-ui,sans-serif;letter-spacing:-.05em;margin-top:6px;color:#E3E7E3;text-shadow:0 1px 0 #b3bbb5,0 2px 0 #a0a8a2,0 3px 0 #8d9690,0 6px 10px rgba(0,0,0,.4)}
+.hspec .hn .d{display:inline-block;opacity:0;transform:translateY(60%) rotateX(-80deg);filter:blur(6px);transition:transform 1s var(--ease),opacity .7s,filter 1s;transition-delay:calc(1.1s + var(--k)*.08s)}
+.hspec .hn sup{font-size:.4em;color:var(--lime);margin:.15em 0 0 .08em;text-shadow:none}
+.hspec .ht{font:700 .8rem "Manrope";letter-spacing:.14em;color:var(--lime2);align-self:flex-end;margin:0 0 .5em .7em;text-shadow:none;opacity:0;transition:opacity .8s 1.7s}
+.hspec.go .hk,.hspec.go .ht{opacity:1}.hspec.go .hn .d{opacity:1;transform:none;filter:none}
+.hrow{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.hshelf{position:relative;margin-top:14px;align-self:start}
+.hshelf .hrail{position:relative;height:2px;background:rgba(255,255,255,.14);transform:scaleX(0);transform-origin:center;transition:transform 1s 1.5s var(--ease)}
+.hshelf .hrail i{position:absolute;inset:-3px 25%;background:radial-gradient(closest-side,rgba(181,221,126,.95),rgba(140,198,63,0));filter:blur(2px);opacity:0;transition:opacity .6s 2s}
+.hshelf.go .hrail{transform:scaleX(1)}.hshelf.go .hrail i{opacity:1}
+.hsb{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(6px,1vw,14px);padding-top:6px;clip-path:inset(0 -20% -60% -20%);perspective:900px}
+.sb{position:relative;border:0;background:none;padding:0;cursor:pointer;transform:translateY(-110%);opacity:0;transition:transform 1.1s cubic-bezier(.3,1.4,.5,1),opacity .5s;transition-delay:calc(2s + var(--i)*.1s)}
+.hshelf.go .sb{transform:none;opacity:1}
+.hshelf.idle .hsb{clip-path:none}
+.sb .sbi{display:block;transition:transform .7s var(--ease),filter .5s;transform-style:preserve-3d;animation:sbf 4.6s calc(var(--i)*-.75s) ease-in-out infinite}
+.sb img{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 18px rgba(0,0,0,.5));-webkit-box-reflect:below 4px linear-gradient(transparent 72%,rgba(255,255,255,.16))}
+@keyframes sbf{0%,100%{translate:0 0}50%{translate:0 -5px}}
+.hshelf.idle .sb .sbi{filter:brightness(.62) saturate(.75)}
+.hshelf.idle .sb.on .sbi,.hshelf .sb:hover .sbi{filter:none;transform:translateY(-12px) scale(1.12) rotateY(-14deg)}
+.hslbl{margin-top:30px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;opacity:0;transition:opacity .8s 3s;justify-content:center}
+.hshelf.go .hslbl{opacity:1}
+.hslbl b{font-size:1.1rem;font-weight:600;color:#fff;transition:opacity .3s}.hslbl span{font:700 .78rem "Manrope";letter-spacing:.12em;color:var(--lime2);transition:opacity .3s}
+.hslbl em{font-style:normal;font-size:.78rem;color:#9AA49D;border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:3px 10px}
+.hslbl.sw b,.hslbl.sw span{opacity:0}
+@media (max-width:900px){.hero{height:auto;min-height:100svh}.hero-in{position:relative;inset:auto;padding-top:118px}.hrow{grid-template-columns:1fr;gap:6px}.hshelf{margin-top:0}.hslbl{margin-top:22px}.hspec .hn{font-size:2.6rem}.bigname .mask.sub>span.subrow{gap:10px}}
+@media (prefers-reduced-motion:reduce){.hspec *,.hshelf *{transition-duration:.01s!important;transition-delay:0s!important;animation:none!important}}
+/* ===== v11: finale rotation ===== */
+.finale .fstk{position:absolute;inset:0}
+.finale .fstk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.12);transition:opacity 1.6s ease,transform 7s linear}
+.finale .fstk img.on{opacity:1;transform:scale(1.02)}
+/* ===== v11: build = before/now only ===== */
+#build .wrap>:not(#ba){display:none!important}
+#build .ba{margin-top:0}
+/* ===== v11: partner links + product 360 badge ===== */
+a.pl9{text-decoration:none;color:inherit;position:relative}
+a.pl9 .pgo{position:absolute;top:6px;inset-inline-end:8px;font-size:.8rem;color:var(--mute);opacity:0;transition:opacity .3s}
+a.pl9:hover .pgo{opacity:1;color:var(--lime)}
+.bag .stage{cursor:zoom-in}
+.b360{position:absolute;top:10px;inset-inline-start:10px;z-index:3;font:800 .72rem "Manrope";letter-spacing:.1em;color:#1a211d;background:#fff;border:1px solid var(--stone);border-radius:20px;padding:4px 9px;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+.bag h3{cursor:pointer}
+.bag h3:hover{color:var(--lime)}
+
+/* ======================= v12 THEME: clean corporate light ======================= */
+:root{
+  --g800:#1F4D16; --g700:#2D6A1F; --g600:#3B8427; --g500:#5FA62F; --g400:#8CC63F; --g200:#CFE6B4; --g100:#EAF4E0; --g50:#F4F9EF;
+  --paper:#F7F8F5; --white:#FDFDFB; --line2:#E2E7DF; --ink900:#122019; --ink700:#2A3830; --ink500:#5B685F; --ink400:#7C877F;
+  --forest:#10291B;
+  --sand:var(--paper); --stone:var(--line2); --text:var(--ink900); --mute:var(--ink500);
+  --brass:var(--g700); --brass2:var(--g400);
+  --ease:cubic-bezier(.23,1,.32,1); --eo:cubic-bezier(.23,1,.32,1);
+  --fh:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --fb:"IBM Plex Sans Arabic","Readex Pro",system-ui,sans-serif;
+}
+body{background:var(--paper);color:var(--text);font-family:var(--fb)}
+body *{font-family:inherit}
+h1,h2,h3,h4,h5,.btn,.chip,.eyebrow,.hstats b,.hn,.v3grade b,.v3name,.tot b,.brand .bt b,.menu,.num,.grade b,.pc,.specs b,figcaption b,.tls b{font-family:var(--fh)!important}
+html[lang=en] body{font-family:var(--fh)}
+h2{font-weight:600;letter-spacing:-.015em;line-height:1.22;color:var(--ink900)}
+.lead{color:var(--ink500);line-height:1.8}
+.eyebrow{color:var(--g700);letter-spacing:.04em;text-transform:none;font-weight:600;font-size:.86rem}
+.eyebrow i{background:var(--g500)}
+/* buttons */
+.btn{border-radius:10px;padding:14px 24px;font-weight:600;transition:transform .16s var(--ease),background-color .25s ease,color .25s ease,border-color .25s ease}
+.btn-p{background:var(--g600);color:#FDFDFB}
+.btn-p:hover{background:var(--g700);transform:none}
+.btn-o{border:1px solid var(--line2);color:var(--ink900);background:var(--white)}
+.btn-o:hover{border-color:var(--g600);color:var(--g700)}
+.hero .btn-o,.dark .btn-o,#app .btn-o,footer .btn-o{border-color:rgba(253,253,251,.38);color:#FDFDFB;background:transparent}
+.hero .btn-o:hover,#app .btn-o:hover{border-color:#FDFDFB;color:#FDFDFB}
+.hero .btn-p{background:var(--g500)}
+.hero .btn-p:hover{background:var(--g600)}
+/* header: transparent over hero, solid white once scrolled */
+header.s{background:rgba(253,253,251,.97);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--line2);box-shadow:0 6px 24px -18px rgba(18,32,25,.35)}
+header.s .menu{color:var(--ink700)}
+header.s .menu a{opacity:1}
+header.s .menu a:hover{color:var(--g700)}
+header.s .brand{color:var(--ink900)}
+header.s .brand .bt small{color:var(--g700)}
+header.s .chip,header.s .icon-btn{border-color:var(--line2);color:var(--ink900)}
+header.s .chip.app{background:var(--g600);border-color:var(--g600);color:#FDFDFB}
+.chip{border-radius:10px}
+.menu a::after{background:var(--g500);height:2px;bottom:-10px}
+/* sections: light by default; two committed brand-green bands (annual + app) and a forest footer */
+section{background:var(--paper)}
+.light2{background:var(--white)}
+.story,#build,#export{background:var(--white);color:var(--ink900)}
+.story .lead,#export .lead{color:var(--ink500)}
+#build{background:var(--paper)}
+.dark{color:var(--ink900)}
+.dark .lead{color:var(--ink500)}
+#review.dark{background:var(--g800);color:#F2F6EF}
+#review.dark .fine{color:rgba(242,246,239,.7)}
+#app.dark{background:var(--forest);color:#EEF3EC}
+#app.dark .lead{color:#AFC0B4}
+#app .feat div,#app .pt2{background:rgba(253,253,251,.04);border-color:rgba(253,253,251,.1)}
+footer{background:var(--forest);color:#A9B8AE}
+footer .legal{border-color:rgba(253,253,251,.1)}
+/* story carousel */
+.snav{background:var(--white);border:1px solid var(--line2);color:var(--ink900);box-shadow:0 10px 26px -16px rgba(18,32,25,.45);backdrop-filter:none}
+.snav:hover{background:var(--g600);border-color:var(--g600);color:#FDFDFB}
+.shud{color:var(--ink400)}
+.shud b{color:var(--ink900)}
+.shud .sdots i{background:var(--line2)}
+.shud .sdots i.on{background:var(--g600)}
+.strip figure{border-radius:12px;overflow:hidden}
+/* finale photos keep their own dark grade */
+.finale .fcap .eyebrow{color:var(--g200)}
+@media (max-width:900px){.finale .fcap h3{color:var(--ink900);text-shadow:none}.finale .fcap p{color:var(--ink500)}.finale .fcap .eyebrow{color:var(--g700)}}
+/* before / now */
+.bahead p{color:var(--ink500)}
+.bac .face{box-shadow:0 18px 40px -26px rgba(18,32,25,.45)}
+.bac .tb{background:var(--white);color:var(--ink900);border:1px solid var(--line2)}
+.bac .ta{background:var(--g600);color:#FDFDFB}
+.bac figcaption:before{background:var(--g500)}
+
+/* dark brand bands: headings */
+#review.dark h2,#app.dark h2,#esg.dark h2,#app.dark h4,#app .feat b,#esg h3{color:#F4F7F2}
+#esg.dark{background:var(--forest);color:#EEF3EC}
+#esg.dark .lead{color:#AFC0B4}
+#esg .eyebrow,#app .eyebrow,#review .eyebrow{color:var(--g200)}
+/* export destinations */
+.dest8{background:var(--white)!important;border:1px solid var(--line2)!important;color:var(--ink900)!important;box-shadow:none!important}
+.dest8 b{color:var(--ink900)!important}.dest8 small{color:var(--ink500)!important}
+.dest8.on{border-color:var(--g600)!important;background:var(--g50)!important;box-shadow:0 0 0 3px rgba(59,132,39,.12)!important}
+.dest8 .st{background:var(--g100)!important;color:var(--g800)!important}
+/* careers: light */
+#careers.dark{background:var(--white)}
+#careers .job{border-color:var(--line2)}
+#careers .job b{color:var(--ink900)}
+#careers .job span{color:var(--ink500)}
+#careers .mini{background:var(--white);border:1px solid var(--line2);color:var(--g700)}
+#careers .mini:hover{border-color:var(--g600)}
+#careers .perks div{background:var(--paper)!important;border:1px solid var(--line2)!important}
+#careers .perks b{color:var(--ink900)!important}#careers .perks span{color:var(--ink500)!important}
+#careers .f{background:var(--paper)!important;border:1px solid var(--line2)!important;color:var(--ink900)}
+#careers .f h4{color:var(--ink900)}
+#careers .f label{color:var(--ink500)}
+#careers input,#careers select,#careers .drop{background:var(--white)!important;border:1px solid var(--line2)!important;color:var(--ink900)!important}
+/* export */
+.egpol{background:var(--g50);border:1px solid var(--g200)}
+.egpol p{color:var(--ink700)}
+.mapbox{background:linear-gradient(180deg,#F3F6F1,#E9EFE6);border:1px solid var(--line2);border-radius:16px}
+#map .grat{stroke:rgba(45,106,31,.08)}
+#map .land{fill:#DCE3D8;stroke:#FDFDFB}
+#map .land.dst{fill:#CFD9CA;stroke:#FDFDFB}
+#map .land.dst.on{fill:#B8D79A;stroke:var(--g600)}
+#map .land.eg{fill:var(--g500);stroke:var(--g800);filter:drop-shadow(0 4px 10px rgba(45,106,31,.35))}
+#map .r8{stroke:rgba(45,106,31,.35)}
+#map .r8.on{stroke:var(--g700)}
+#map .flow{stroke:var(--g800)}
+#map .cpt{fill:var(--g700);stroke:#FDFDFB}
+#map .cring{stroke:var(--g600)}
+#map .clbl{fill:var(--ink700);stroke:#F3F6F1}
+#map .clbl.on{fill:var(--g800)}
+#map .eglbl{fill:var(--ink900);stroke:#F3F6F1}
+#map .mover{fill:var(--g700);filter:none}
+#export .maplbl{color:var(--ink500)}
+/* partners in success */
+.pis{background:var(--white);padding:120px 0}
+.pis-g{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
+.pis h2{margin:14px 0 14px;font-size:clamp(1.8rem,3.2vw,2.6rem)}
+.pis-wall{min-height:260px;border-radius:16px;background:var(--paper);border:1px dashed var(--g200);display:grid;place-items:center;padding:28px}
+.pis-empty{max-width:420px;text-align:center;display:flex;flex-direction:column;gap:8px;color:var(--ink500);font-size:.92rem;line-height:1.7}
+.pis-empty b{color:var(--ink900);font-size:1.05rem}
+@media (max-width:900px){.pis-g{grid-template-columns:1fr;gap:28px}.pis{padding:80px 0}}
+/* cards & surfaces across light sections */
+.mv>div,.pr,.cert,.nc,.dl .side{border-radius:14px}
+.plogos .pl9{background:var(--white)}
+.pend{color:var(--g700);border-color:var(--g200);background:var(--g50)}
+/* products */
+#products{background:var(--paper)}
+.b360{color:var(--g800);border-color:var(--g200);background:var(--white)}
+/* hero refinements */
+.hero .shade{background:linear-gradient(180deg,rgba(13,24,17,.5) 0%,rgba(13,24,17,.12) 36%,rgba(13,24,17,.82) 100%)}
+.hero .eyebrow{color:var(--g200);text-transform:none}
+.hero .eyebrow i{background:var(--g400)}
+.bigname .sub em{color:var(--g200)}
+.hstats{border-top-color:rgba(253,253,251,.18)}
+.hstats b{font-weight:500}
+/* 3D viewer + quality to the new palette */
+.v3info h4{color:var(--g700)}
+.v3tag{border-radius:8px}
+.q3x{background:radial-gradient(70% 60% at 50% 42%,#FDFDFB,#EEF2EB 60%,#E1E8DD)}
+/* tabs / filters */
+.ptabs .pill{background:var(--g700)!important}
+#pfil button.on{background:var(--g700)!important;border-color:var(--g700)!important;color:#FDFDFB!important}
+/* focus + selection */
+:focus-visible{outline:2px solid var(--g600);outline-offset:3px}
+::selection{background:var(--g200);color:var(--ink900)}
+@media (hover:hover) and (pointer:fine){.btn-p:hover{background:var(--g700)}}
+
+/* ===== v13: Almarai headings (self-hosted) ===== */
+:root{--fh:"Almarai","IBM Plex Sans Arabic",system-ui,sans-serif;--fb:"IBM Plex Sans Arabic","Almarai",system-ui,sans-serif}
+h1,h2,h3,h4{font-weight:800;letter-spacing:0}
+h2{font-weight:800;line-height:1.3}
+.hero h1.bigname{font-family:var(--fh)!important;font-weight:800;font-size:clamp(3rem,7.4vw,6.6rem);line-height:1.14;letter-spacing:0}
+.hero h1.bigname .mask:not(.sub)>span{color:#F1F3EF;text-shadow:0 2px 28px rgba(8,16,11,.38)}
+.hero h1.bigname .mask:not(.sub){padding-bottom:.18em}
+.bigname .sub{font-family:var(--fh);font-weight:400}
+.bigname .sub em{font-weight:400;font-style:normal}
+.hspec .hn{font-family:var(--fh);font-weight:800;color:#F1F3EF;text-shadow:0 2px 20px rgba(8,16,11,.35);letter-spacing:-.02em}
+html[lang=en] .hero h1.bigname{letter-spacing:-.02em}
+
+/* v12.1 vision band */
+.band.vb{height:auto;min-height:min(92vh,860px);align-items:center;background:oklch(0.2 0.03 160)}
+.band.vb img{filter:none;object-position:50% 55%;transform-origin:50% 60%}
+.band.vb::after{background:
+  linear-gradient(270deg,oklch(0.17 0.035 160/.88) 0%,oklch(0.17 0.035 160/.62) 34%,oklch(0.17 0.035 160/0) 64%),
+  linear-gradient(0deg,oklch(0.15 0.03 160/.55),oklch(0.15 0.03 160/0) 38%)}
+[dir=ltr] .band.vb::after{background:linear-gradient(90deg,oklch(0.17 0.035 160/.88) 0%,oklch(0.17 0.035 160/.62) 34%,oklch(0.17 0.035 160/0) 64%),linear-gradient(0deg,oklch(0.15 0.03 160/.55),oklch(0.15 0.03 160/0) 38%)}
+.band.vb .wrap{padding:120px 0 110px;width:min(1240px,92vw)}
+.vbx{max-width:min(640px,100%)}
+.vbk{display:inline-flex;align-items:center;gap:12px;font-family:var(--fh);font-weight:700;font-size:.95rem;letter-spacing:.02em;color:oklch(0.86 0.13 128);margin-bottom:22px}
+.vbk::before{content:"";width:40px;height:2px;background:currentColor;border-radius:2px}
+.band.vb h2{font-family:var(--fh)!important;font-weight:800;font-size:clamp(2.1rem,4.4vw,4.1rem);line-height:1.28;color:oklch(0.97 0.006 130)!important;max-width:17ch;margin:0;text-wrap:balance;text-shadow:0 2px 24px oklch(0.12 0.02 160/.45)}
+.band.vb h2 em{font-style:normal;color:oklch(0.86 0.13 128)}
+[dir=ltr] .band.vb h2{line-height:1.12;letter-spacing:-.015em}
+.vbm{display:flex;align-items:center;gap:14px;margin-top:34px;font-size:.95rem;color:oklch(0.9 0.01 140/.82)}
+.vbm i{width:5px;height:5px;border-radius:50%;background:oklch(0.86 0.13 128)}
+@media (max-width:720px){.band.vb{min-height:78vh}.band.vb::after{background:linear-gradient(0deg,oklch(0.16 0.035 160/.92) 10%,oklch(0.16 0.035 160/.35) 70%,oklch(0.16 0.035 160/.15))}.band.vb .wrap{align-self:flex-end;padding:0 0 64px}.band.vb img{object-position:38% 50%}}
+
+/* v12.1 partners wall */
+.pis-wall{display:grid!important;grid-template-columns:1fr 1fr;gap:14px;place-items:stretch!important;background:none!important;border:0!important;padding:0!important;min-height:0!important}
+.pt{display:flex;align-items:center;gap:16px;padding:20px 22px;border-radius:14px;background:var(--paper);border:1px solid var(--line2);transition:transform .35s cubic-bezier(.22,1,.36,1),border-color .35s,background .35s}
+.pt:hover{transform:translateY(-3px);border-color:var(--g200);background:var(--g50)}
+.pt1{grid-column:1/-1;padding:26px 26px;background:var(--g800);border-color:var(--g800)}
+.pt1:hover{background:var(--g700);border-color:var(--g700)}
+.pm{flex:none;width:52px;height:52px;border-radius:12px;display:grid;place-items:center;font-family:var(--fh);font-weight:800;font-size:1.55rem;color:var(--g700);background:var(--g100);border:1px solid var(--g200)}
+.pt1 .pm{width:62px;height:62px;font-size:1.9rem;color:var(--g800);background:var(--g400);border-color:var(--g400)}
+.pn{display:flex;flex-direction:column;gap:5px;min-width:0}
+.pn b{font-family:var(--fh);font-weight:700;font-size:1rem;line-height:1.45;color:var(--ink900)}
+.pt1 .pn b{font-size:1.2rem;color:#F2F6EF}
+.pn small{font-size:.8rem;color:var(--ink500)}
+.pt1 .pn small{color:var(--g200)}
+.pt img.plogo{height:44px;width:auto;max-width:150px;object-fit:contain}
+@media (max-width:560px){.pis-wall{grid-template-columns:1fr}.pt{padding:16px 18px}}
+
+/* v12.2 partners: plant photo + logo wall */
+#partners.pis{position:relative;overflow:hidden;background:oklch(0.2 0.035 155);color:#F2F6EF;padding:140px 0}
+.pis-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 60%;filter:saturate(.75) contrast(1.05)}
+#partners.pis::before{content:"";position:absolute;inset:0;z-index:0;background:
+ linear-gradient(270deg,oklch(0.18 0.04 155/.93) 0%,oklch(0.18 0.04 155/.86) 42%,oklch(0.18 0.04 155/.66) 100%),
+ linear-gradient(0deg,oklch(0.15 0.03 155/.5),oklch(0.15 0.03 155/0) 50%)}
+#partners .wrap{position:relative;z-index:1}
+#partners .eyebrow{color:var(--g200)}
+#partners h2{color:#F4F7F2!important;font-family:var(--fh)}
+#partners .lead{color:rgba(242,246,239,.78)}
+.pis-wall{display:grid!important;grid-template-columns:1fr 1fr;gap:1px!important;background:rgba(242,246,239,.14)!important;border:1px solid rgba(242,246,239,.14)!important;border-radius:18px;overflow:hidden;padding:0!important}
+.pt{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:150px;padding:26px 26px 22px;background:oklch(0.21 0.035 155/.82);color:inherit;text-decoration:none;border:0!important;border-radius:0!important;transition:background .35s cubic-bezier(.22,1,.36,1)}
+a.pt:hover{background:oklch(0.27 0.05 150/.9)}
+.pt1{grid-column:1/-1;min-height:190px;flex-direction:row;align-items:center;gap:28px;background:oklch(0.24 0.045 152/.86)}
+.plogo{height:auto;width:min(260px,60%);max-height:110px;object-fit:contain;object-position:right center;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+[dir=ltr] .plogo{object-position:left center}
+a.pt:hover .plogo{transform:scale(1.03)}
+.pword{font-family:var(--fh);font-weight:800;font-size:1.12rem;line-height:1.45;color:#F4F7F2;letter-spacing:0}
+.pmeta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.pt1 .pmeta{flex-direction:column;align-items:flex-start;margin-inline-start:auto}
+.pmeta small{font-size:.8rem;color:var(--g200);letter-spacing:.02em}
+.pgo{display:inline-flex;align-items:center;gap:6px;font-size:.85rem;font-weight:700;color:#F4F7F2;padding:8px 14px;border-radius:999px;border:1px solid rgba(242,246,239,.35);transition:background .3s,border-color .3s}
+.pgo svg{width:14px;height:14px}
+[dir=rtl] .pgo svg{transform:scaleX(-1)}
+a.pt:hover .pgo{background:var(--g500);border-color:var(--g500)}
+.pm,.pn{display:none}
+@media (max-width:900px){#partners.pis{padding:96px 0}#partners.pis::before{background:oklch(0.18 0.04 155/.88)}}
+@media (max-width:560px){.pis-wall{grid-template-columns:1fr}.pt1{flex-direction:column;align-items:flex-start}.pt1 .pmeta{margin:0;flex-direction:row;align-items:center;width:100%}.pt{min-height:0}}
+
+.pis-bg{z-index:0}
+#partners.pis::before{z-index:1}
+#partners .wrap{z-index:2}
+.pt img.plogo{height:auto!important;width:min(300px,62%)!important;max-width:none!important;max-height:120px!important}
+
+#partners.pis::before{background:linear-gradient(270deg,oklch(0.17 0.04 155/.9) 0%,oklch(0.17 0.04 155/.78) 38%,oklch(0.17 0.04 155/.38) 75%,oklch(0.17 0.04 155/.25) 100%),linear-gradient(0deg,oklch(0.14 0.03 155/.55),oklch(0.14 0.03 155/0) 45%)}
+[dir=ltr] #partners.pis::before{background:linear-gradient(90deg,oklch(0.17 0.04 155/.9) 0%,oklch(0.17 0.04 155/.78) 38%,oklch(0.17 0.04 155/.38) 75%,oklch(0.17 0.04 155/.25) 100%),linear-gradient(0deg,oklch(0.14 0.03 155/.55),oklch(0.14 0.03 155/0) 45%)}
+.pis-bg{filter:saturate(.9) contrast(1.05) brightness(.95)}
+.pt{background:oklch(0.19 0.035 155/.88)}
+.pt1{background:oklch(0.22 0.045 152/.9)}
+#partners.pis{padding:180px 0}
+@media (max-width:900px){#partners.pis{padding:110px 0}#partners.pis::before{background:linear-gradient(180deg,oklch(0.17 0.04 155/.92),oklch(0.17 0.04 155/.7) 60%,oklch(0.17 0.04 155/.5))}}
 </style>
 </head>
 <body>
 <div class="sprog" id="sprog"></div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="lggr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#b5dd7e"/><stop offset=".55" stop-color="#8cc63f"/><stop offset="1" stop-color="#5f8f25"/></linearGradient></defs></svg>
 <header id="hdr"><div class="wrap nav">
-  <a href="#top" class="brand" aria-label="Egyptian Cement"><img src="assets/logo-mark.png" alt="" onerror="this.remove()"><span class="bt"><b>أسمنت المصريين</b><small>EGYPTIAN CEMENT</small></span></a>
+  <a href="#top" class="brand" aria-label="Egyptian Cement"><span class="lg3d" aria-hidden="true"><span class="lgc"><svg class="lb" style="--z:0" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:1" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:2" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:3" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:4" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:5" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:6" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:7" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:8" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:9" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb" style="--z:10" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lf" style="--z:11" viewBox="0 0 100 120"><g><circle cx="50" cy="48" r="41" fill="none" stroke-width="7"/><rect x="7" y="94" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="104" width="86" height="6" rx="3" stroke="none"/><rect x="7" y="114" width="86" height="5.5" rx="2.7" stroke="none"/></g></svg><svg class="lb lt" style="--z:0" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:1" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:2" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:3" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:4" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:5" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:6" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:7" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:8" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:9" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lb lt" style="--z:10" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><svg class="lf lt" style="--z:11" viewBox="0 0 100 120"><g><path d="M46.5 19.2A29 29 0 1 0 46.5 76.8M20 49H47M52.5 19.2V76.8M53.5 19.2A29 29 0 0 1 76.3 35.7M76.3 60.3A29 29 0 0 1 53.5 76.8" fill="none" stroke-width="5.6"/></g></svg><i class="lgs"></i></span></span><span class="bt"><b>أسمنت المصريين</b><small>EGYPTIAN CEMENT</small></span></a>
   <nav class="menu">
     <a href="#about"><span class="ar">من نحن</span><span class="en">About</span></a>
     <a href="#plant"><span class="ar">المصنع</span><span class="en">The Plant</span></a>
@@ -999,17 +1368,19 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
   </div>
   <div class="shade"></div>
   <canvas id="heat"></canvas>
+  
   <div class="hero-in"><div class="wrap">
     <span class="eyebrow"><i></i><span class="ar">مصنع جهينة · سوهاج</span><span class="en">Gehina plant · Sohag</span></span>
     <h1 class="bigname" style="margin-top:14px">
       <span class="mask"><span class="ar">أسمنت المصريين</span><span class="en">Egyptian Cement</span></span>
-      <span class="mask sub"><span><em class="ar">قوة تبني مستقبل مصر</em><em class="en">Strength that builds Egypt.</em></span></span>
+      <span class="mask sub"><span class="subrow"><span class="slg"><em class="ar">قوة تبني مستقبل مصر</em><em class="en">Strength that builds Egypt.</em></span><span class="hspec" id="hspec"><span class="hk"><span class="ar">المواصفة القياسية المصرية</span><span class="en">Egyptian standard</span> <b>ES 4756-1</b></span><span class="hn" dir="ltr"><span class="d" style="--k:0">4</span><span class="d" style="--k:1">2</span><span class="d" style="--k:2">.</span><span class="d" style="--k:3">5</span><sup class="d" style="--k:4">N</sup><span class="ht">CEM I</span></span></span></span></span>
     </h1>
-    <p><span class="ar">أحدث مصنع أسمنت متكامل في مصر والمنطقة — تقنية عالمية بأيادٍ مصرية، من قلب الصعيد إلى المشروعات القومية والأسواق الأفريقية.</span><span class="en">The newest integrated cement plant in Egypt and the region — world-class technology, Egyptian hands, from the heart of Upper Egypt to national megaprojects and African markets.</span></p>
+    <div class="hrow"><div class="hcol">
+    <p><span class="ar">أحدث مصنع أسمنت متكامل في مصر والمنطقة، تقنية عالمية بأيادٍ مصرية، من قلب الصعيد إلى المشروعات القومية والأسواق الأفريقية.</span><span class="en">The newest integrated cement plant in Egypt and the region, world-class technology, Egyptian hands, from the heart of Upper Egypt to national megaprojects and African markets.</span></p>
     <div class="ctas">
       <a class="btn btn-p" href="#products"><span class="ar">منتجاتنا</span><span class="en">Our products</span> <span class="arrow">→</span></a>
       <a class="btn btn-o" href="#story"><span class="ar">قصة المصنع</span><span class="en">The plant story</span></a>
-    </div>
+    </div></div><div class="hshelf" id="hshelf"><div class="hrail"><i></i></div><div class="hsb"><button class="sb" style="--i:0" data-k="bagc4" data-ar="أسمنت المصريين" data-en="Egyptian Cement" data-t="CEM I 42.5N" aria-label="Egyptian Cement — 3D"><span class="sbi"><img src="assets/bags/bagc4.webp" alt="Egyptian Cement"></span></button><button class="sb" style="--i:1" data-k="bagc5" data-ar="أسمنت المصريين المقاوم" data-en="Egyptian Cement SRC" data-t="CEM I 42.5N-SR5" aria-label="Egyptian Cement SRC — 3D"><span class="sbi"><img src="assets/bags/bagc5.webp" alt="Egyptian Cement SRC"></span></button><button class="sb" style="--i:2" data-k="bagc3" data-ar="نسر الصعيد" data-en="Nesr El Saied" data-t="CEM I 42.5N" aria-label="Nesr El Saied — 3D"><span class="sbi"><img src="assets/bags/bagc3.webp" alt="Nesr El Saied"></span></button><button class="sb" style="--i:3" data-k="bagc2" data-ar="الأسيوطي" data-en="El Assiouty" data-t="CEM I 42.5N" aria-label="El Assiouty — 3D"><span class="sbi"><img src="assets/bags/bagc2.webp" alt="El Assiouty"></span></button><button class="sb" style="--i:4" data-k="bagc1" data-ar="السوهاجي" data-en="El Sohagy" data-t="CEM I 42.5N" aria-label="El Sohagy — 3D"><span class="sbi"><img src="assets/bags/bagc1.webp" alt="El Sohagy"></span></button><button class="sb" style="--i:5" data-k="bagc6" data-ar="نسر المصريين" data-en="Nesr El Masryeen" data-t="CEM I 42.5N" aria-label="Nesr El Masryeen — 3D"><span class="sbi"><img src="assets/bags/bagc6.webp" alt="Nesr El Masryeen"></span></button></div><div class="hslbl"><b id="hsn">أسمنت المصريين</b><span id="hst" dir="ltr">CEM I 42.5N</span><em><span class="ar">اضغط لعرض 360°</span><span class="en">Tap for 360°</span></em></div></div></div>
     <div class="hstats">
       <div><b data-c="2">0</b><span class="ar">مليون طن أسمنت سنوياً</span><span class="en">million t cement / year</span></div>
       <div><b data-c="6000">0</b><span class="ar">طن كلنكر يومياً</span><span class="en">TPD clinker</span></div>
@@ -1025,17 +1396,17 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
   <div class="wrap">
     <span class="eyebrow rv"><i></i><span class="ar">قصة المصنع</span><span class="en">The plant story</span></span>
     <h2 class="rv d1"><span class="ar">من نقطة على الخريطة… إلى مصنع يعمل ليلاً ونهاراً</span><span class="en">From a point on the map to a plant running day and night</span></h2>
-    <p class="lead rv d2"><span class="ar">صور حقيقية من الموقع — كثير منها من أعلى السيلو وبرج التسخين: من أرض صحراوية خالية في 2017، إلى الأساسات والهياكل، حتى المصنع وهو يعمل اليوم.</span><span class="en">Real photos from the site — many taken from the top of the silo and preheater tower: from empty desert in 2017, through foundations and structures, to the plant running today.</span></p>
+    <p class="lead rv d2"><span class="ar">صور حقيقية من الموقع، كثير منها من أعلى السيلو وبرج التسخين: من أرض صحراوية خالية في 2017، إلى الأساسات والهياكل، حتى المصنع وهو يعمل اليوم.</span><span class="en">Real photos from the site, many taken from the top of the silo and preheater tower: from empty desert in 2017, through foundations and structures, to the plant running today.</span></p>
     <div class="scar rv"><button class="snav prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg></button><div class="strip" id="strip">
 <figure><img loading="lazy" src="assets/build/b02_t.jpg" alt="The land"><figcaption><b><span class="ar">الأرض</span><span class="en">The land</span></b><span class="ar">صورة حقيقية · يوليو 2017</span><span class="en">Real photo · Jul 2017</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b05_t.jpg" alt="Batching plant"><figcaption><b><span class="ar">محطة الخرسانة</span><span class="en">Batching plant</span></b><span class="ar">صورة حقيقية · سبتمبر 2017</span><span class="en">Real photo · Sep 2017</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b09_t.jpg" alt="Silo foundations"><figcaption><b><span class="ar">أساسات السيلو</span><span class="en">Silo foundations</span></b><span class="ar">صورة حقيقية · يناير 2018</span><span class="en">Real photo · Jan 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b11_t.jpg" alt="The site from above"><figcaption><b><span class="ar">الموقع من أعلى</span><span class="en">The site from above</span></b><span class="ar">صورة حقيقية · فبراير 2018</span><span class="en">Real photo · Feb 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b19_t.jpg" alt="The silo rises"><figcaption><b><span class="ar">صعود السيلو</span><span class="en">The silo rises</span></b><span class="ar">صورة حقيقية · فبراير 2018</span><span class="en">Real photo · Feb 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b21_t.jpg" alt="From the silo top"><figcaption><b><span class="ar">من أعلى السيلو</span><span class="en">From the silo top</span></b><span class="ar">صورة حقيقية · مارس 2018</span><span class="en">Real photo · Mar 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b25_t.jpg" alt="Preheater tower"><figcaption><b><span class="ar">برج التسخين</span><span class="en">Preheater tower</span></b><span class="ar">صورة حقيقية · يوليو 2018</span><span class="en">Real photo · Jul 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b32_t.jpg" alt="The line from the tower"><figcaption><b><span class="ar">الخط من أعلى البرج</span><span class="en">The line from the tower</span></b><span class="ar">صورة حقيقية · يوليو 2018</span><span class="en">Real photo · Jul 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b40_t.jpg" alt="Preheater cyclones"><figcaption><b><span class="ar">سيكلونات البرج</span><span class="en">Preheater cyclones</span></b><span class="ar">صورة حقيقية · سبتمبر 2018</span><span class="en">Real photo · Sep 2018</span></figcaption></figure><figure><img loading="lazy" src="assets/build/b42_t.jpg" alt="Silo & tower"><figcaption><b><span class="ar">السيلو والبرج</span><span class="en">Silo & tower</span></b><span class="ar">صورة حقيقية · سبتمبر 2018</span><span class="en">Real photo · Sep 2018</span></figcaption></figure>
     </div><button class="snav next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="shud"><span><b id="sci">01</b> / <span>10</span></span><span class="sdots" id="sdots"></span></div>
   </div>
   <div class="finale" id="finale">
-    <div class="fp night"><img src="assets/13_night.jpg" alt="The plant lit at night"><span class="ft"><i></i><span class="ar">ليلاً — المصنع منوّر</span><span class="en">By night</span></span></div>
-    <div class="fp day"><img src="assets/a090.jpg" alt="The whole plant in the morning"><span class="ft"><i></i><span class="ar">صباحاً — المصنع بكامل حجمه</span><span class="en">By morning — the whole plant</span></span></div>
+    <div class="fp night"><div class="fstk"><img class="on" src="assets/13_night.jpg" alt="The plant at night"><img loading="lazy" src="assets/mh/mh_aerial_night.jpg" alt="The plant at night"><img loading="lazy" src="assets/mh/mh_night_wide.jpg" alt="The plant at night"><img loading="lazy" src="assets/mh/mh_kiln_night.jpg" alt="The plant at night"><img loading="lazy" src="assets/mh/mh_night_skyline.jpg" alt="The plant at night"><img loading="lazy" src="assets/mh/mh_night_tower.jpg" alt="The plant at night"></div><span class="ft"><i></i><span class="ar">ليلاً، المصنع منوّر</span><span class="en">By night</span></span></div>
+    <div class="fp day"><div class="fstk"><img class="on" src="assets/a090.jpg" alt="The plant by day"><img loading="lazy" src="assets/a127.jpg" alt="The plant by day"><img loading="lazy" src="assets/a032.jpg" alt="The plant by day"><img loading="lazy" src="assets/08_domes.jpg" alt="The plant by day"><img loading="lazy" src="assets/mh/mh_conveyors.jpg" alt="The plant by day"><img loading="lazy" src="assets/a008.jpg" alt="The plant by day"></div><span class="ft"><i></i><span class="ar">صباحاً، المصنع بكامل حجمه</span><span class="en">By morning, the whole plant</span></span></div>
     <div class="fcap"><span class="eyebrow"><i></i><span class="ar">النهاية… وبداية الحكاية</span><span class="en">The end… and the beginning</span></span>
       <h3><span class="ar">صُنع في مصر… ويُصدَّر للعالم</span><span class="en">Made in Egypt. Shipped to the world.</span></h3>
-      <p><span class="ar">مصنع جهينة — سوهاج، يعمل ليلاً ونهاراً</span><span class="en">Gehina plant, Sohag — running day and night</span></p></div>
+      <p><span class="ar">مصنع جهينة، سوهاج، يعمل ليلاً ونهاراً</span><span class="en">Gehina plant, Sohag, running day and night</span></p></div>
   </div>
 </section>
 
@@ -1043,12 +1414,20 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
 <section class="dark" id="build">
   <div class="wrap">
     <span class="eyebrow rv"><i></i><span class="ar">أرشيف الإنشاء</span><span class="en">Construction archive</span></span>
-    <h2 class="rv d1"><span class="ar">كيف بُني المصنع… صورة بصورة</span><span class="en">How the plant was built — frame by frame</span></h2>
-    <p class="lead rv d2"><span class="ar">64 صورة حقيقية من أرشيف الموقع، مرتبة زمنياً من يوليو 2017، ومنها لقطات مأخوذة من أعلى السيلو وبرج التسخين.</span><span class="en">64 real photos from the site archive, in chronological order from July 2017 — including views from the top of the silo and preheater tower.</span></p>
+    <h2 class="rv d1"><span class="ar">كيف بُني المصنع… صورة بصورة</span><span class="en">How the plant was built, frame by frame</span></h2>
+    <p class="lead rv d2"><span class="ar">64 صورة حقيقية من أرشيف الموقع، مرتبة زمنياً من يوليو 2017، ومنها لقطات مأخوذة من أعلى السيلو وبرج التسخين.</span><span class="en">64 real photos from the site archive, in chronological order from July 2017, including views from the top of the silo and preheater tower.</span></p>
     <div class="gchips rv" id="gchips"><button class="on" data-g="all"><span class="ar">الكل</span><span class="en">All</span></button><button data-g="s1"><span class="ar">تمهيد الأرض</span><span class="en">Site preparation</span></button><button data-g="s2"><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></button><button data-g="s3"><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></button><button data-g="s4"><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></button><button data-g="s5"><span class="ar">المصنع بعد الانتهاء</span><span class="en">The finished plant</span></button><button data-g="aer"><span class="ar">من أعلى</span><span class="en">From above</span></button></div>
     <div class="fly" id="fly" hidden><div class="fstage"><img src="assets/build/b11.jpg" alt="" data-ar="فبراير 2018" data-en="Feb 2018"><img src="assets/build/b13.jpg" alt="" data-ar="فبراير 2018" data-en="Feb 2018"><img src="assets/build/b21.jpg" alt="" data-ar="مارس 2018" data-en="Mar 2018"><img src="assets/build/b22.jpg" alt="" data-ar="مارس 2018" data-en="Mar 2018"><img src="assets/build/b31.jpg" alt="" data-ar="يوليو 2018" data-en="Jul 2018"><img src="assets/build/b32.jpg" alt="" data-ar="يوليو 2018" data-en="Jul 2018"><img src="assets/build/b33.jpg" alt="" data-ar="يوليو 2018" data-en="Jul 2018"><img src="assets/08_domes.jpg" alt="" data-ar="المصنع اليوم" data-en="Today"><img src="assets/a127.jpg" alt="" data-ar="المصنع اليوم" data-en="Today"></div><div class="fhud"><span class="recdot"></span><span class="ar">جولة من أعلى · من الأرض الخالية إلى المصنع المكتمل</span><span class="en">Aerial tour · from empty land to the finished plant</span><span class="fyear" id="fyear"></span></div><div class="fbar"><i id="fbar"></i></div></div>
     <div class="ggrid collapsed" id="ggrid"><button class="gi" data-i="0" data-st="s1" data-aer="0"><img loading="lazy" src="assets/build/b01_t.jpg" alt="Site preparation — Jul 2017"><span class="gc"><b><span class="ar">تمهيد الأرض</span><span class="en">Site preparation</span></b><span class="ar">يوليو 2017</span><span class="en">Jul 2017</span></span></button><button class="gi" data-i="1" data-st="s1" data-aer="0"><img loading="lazy" src="assets/build/b02_t.jpg" alt="Site preparation — Jul 2017"><span class="gc"><b><span class="ar">تمهيد الأرض</span><span class="en">Site preparation</span></b><span class="ar">يوليو 2017</span><span class="en">Jul 2017</span></span></button><button class="gi" data-i="2" data-st="s1" data-aer="0"><img loading="lazy" src="assets/build/b03_t.jpg" alt="Site preparation — Jul 2017"><span class="gc"><b><span class="ar">تمهيد الأرض</span><span class="en">Site preparation</span></b><span class="ar">يوليو 2017</span><span class="en">Jul 2017</span></span></button><button class="gi" data-i="3" data-st="s1" data-aer="0"><img loading="lazy" src="assets/build/b04_t.jpg" alt="Site preparation — Jul 2017"><span class="gc"><b><span class="ar">تمهيد الأرض</span><span class="en">Site preparation</span></b><span class="ar">يوليو 2017</span><span class="en">Jul 2017</span></span></button><button class="gi" data-i="4" data-st="s2" data-aer="0"><img loading="lazy" src="assets/build/b05_t.jpg" alt="Excavation & foundations — Sep 2017"><span class="gc"><b><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></b><span class="ar">سبتمبر 2017</span><span class="en">Sep 2017</span></span></button><button class="gi" data-i="5" data-st="s2" data-aer="0"><img loading="lazy" src="assets/build/b06_t.jpg" alt="Excavation & foundations — Sep 2017"><span class="gc"><b><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></b><span class="ar">سبتمبر 2017</span><span class="en">Sep 2017</span></span></button><button class="gi" data-i="6" data-st="s2" data-aer="1"><img loading="lazy" src="assets/build/b07_t.jpg" alt="Excavation & foundations — Late 2017"><span class="gc"><b><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></b><span class="ar">أواخر 2017</span><span class="en">Late 2017</span></span></button><button class="gi" data-i="7" data-st="s2" data-aer="1"><img loading="lazy" src="assets/build/b08_t.jpg" alt="Excavation & foundations — Late 2017"><span class="gc"><b><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></b><span class="ar">أواخر 2017</span><span class="en">Late 2017</span></span></button><button class="gi" data-i="8" data-st="s2" data-aer="1"><img loading="lazy" src="assets/build/b09_t.jpg" alt="Excavation & foundations — Jan 2018"><span class="gc"><b><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></b><span class="ar">يناير 2018</span><span class="en">Jan 2018</span></span></button><button class="gi" data-i="9" data-st="s2" data-aer="0"><img loading="lazy" src="assets/build/b10_t.jpg" alt="Excavation & foundations — Jan 2018"><span class="gc"><b><span class="ar">الحفر والأساسات</span><span class="en">Excavation & foundations</span></b><span class="ar">يناير 2018</span><span class="en">Jan 2018</span></span></button><button class="gi" data-i="10" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b11_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="11" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b12_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="12" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b13_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="13" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b14_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="14" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b15_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="15" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b16_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="16" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b17_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="17" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b18_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="18" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b19_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="19" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b20_t.jpg" alt="Structures & silos — Feb 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">فبراير 2018</span><span class="en">Feb 2018</span></span></button><button class="gi" data-i="20" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b21_t.jpg" alt="Structures & silos — Mar 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">مارس 2018</span><span class="en">Mar 2018</span></span></button><button class="gi" data-i="21" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b22_t.jpg" alt="Structures & silos — Mar 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">مارس 2018</span><span class="en">Mar 2018</span></span></button><button class="gi" data-i="22" data-st="s3" data-aer="1"><img loading="lazy" src="assets/build/b23_t.jpg" alt="Structures & silos — Mar 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">مارس 2018</span><span class="en">Mar 2018</span></span></button><button class="gi" data-i="23" data-st="s3" data-aer="0"><img loading="lazy" src="assets/build/b24_t.jpg" alt="Structures & silos — Mar 2018"><span class="gc"><b><span class="ar">الهياكل والسيلوهات</span><span class="en">Structures & silos</span></b><span class="ar">مارس 2018</span><span class="en">Mar 2018</span></span></button><button class="gi" data-i="24" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b25_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="25" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b26_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="26" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b27_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="27" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b28_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="28" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b29_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="29" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b30_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="30" data-st="s4" data-aer="1"><img loading="lazy" src="assets/build/b31_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="31" data-st="s4" data-aer="1"><img loading="lazy" src="assets/build/b32_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="32" data-st="s4" data-aer="1"><img loading="lazy" src="assets/build/b33_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="33" data-st="s4" data-aer="1"><img loading="lazy" src="assets/build/b34_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="34" data-st="s4" data-aer="1"><img loading="lazy" src="assets/build/b35_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="35" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b36_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="36" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b37_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="37" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b38_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="38" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b39_t.jpg" alt="Preheater & the line — Jul 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">يوليو 2018</span><span class="en">Jul 2018</span></span></button><button class="gi" data-i="39" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b40_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="40" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b41_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="41" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b42_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="42" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b43_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="43" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b44_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="44" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b45_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="45" data-st="s4" data-aer="0"><img loading="lazy" src="assets/build/b46_t.jpg" alt="Preheater & the line — Sep 2018"><span class="gc"><b><span class="ar">البرج وخط الإنتاج</span><span class="en">Preheater & the line</span></b><span class="ar">سبتمبر 2018</span><span class="en">Sep 2018</span></span></button><button class="gi" data-i="46" data-st="s5" data-aer="1" data-full="assets/a127.jpg"><img loading="lazy" src="assets/build/fin_a127.jpg" alt="The plant from the tower top"><span class="gc"><b><span class="ar">المصنع من أعلى البرج</span><span class="en">The plant from the tower top</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="47" data-st="s5" data-aer="1" data-full="assets/08_domes.jpg"><img loading="lazy" src="assets/build/fin_08_domes.jpg" alt="Storage domes from above"><span class="gc"><b><span class="ar">قباب التخزين من أعلى</span><span class="en">Storage domes from above</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="48" data-st="s5" data-aer="0" data-full="assets/a033.jpg"><img loading="lazy" src="assets/build/fin_a033.jpg" alt="The complete line"><span class="gc"><b><span class="ar">الخط الكامل</span><span class="en">The complete line</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="49" data-st="s5" data-aer="0" data-full="assets/a032.jpg"><img loading="lazy" src="assets/build/fin_a032.jpg" alt="Silos and preheater"><span class="gc"><b><span class="ar">الصوامع وبرج التسخين</span><span class="en">Silos and preheater</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="50" data-st="s5" data-aer="0" data-full="assets/a090.jpg"><img loading="lazy" src="assets/build/fin_a090.jpg" alt="The finished plant"><span class="gc"><b><span class="ar">المصنع بعد الانتهاء</span><span class="en">The finished plant</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="51" data-st="s5" data-aer="0" data-full="assets/13_night.jpg"><img loading="lazy" src="assets/build/fin_13_night.jpg" alt="The plant at night"><span class="gc"><b><span class="ar">المصنع ليلاً</span><span class="en">The plant at night</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="52" data-st="s5" data-aer="0" data-full="assets/14_dusk.jpg"><img loading="lazy" src="assets/build/fin_14_dusk.jpg" alt="Kiln and silos at dusk"><span class="gc"><b><span class="ar">الفرن والصوامع عند الغروب</span><span class="en">Kiln and silos at dusk</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="53" data-st="s5" data-aer="0" data-full="assets/12_sun.jpg"><img loading="lazy" src="assets/build/fin_12_sun.jpg" alt="Milling units"><span class="gc"><b><span class="ar">وحدات الطحن</span><span class="en">Milling units</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="54" data-st="s5" data-aer="0" data-full="assets/b20_silos2.jpg"><img loading="lazy" src="assets/build/fin_b20_silos2.jpg" alt="Cement silos"><span class="gc"><b><span class="ar">صوامع الأسمنت</span><span class="en">Cement silos</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="55" data-st="s5" data-aer="0" data-full="assets/09_dome_in.jpg"><img loading="lazy" src="assets/build/fin_09_dome_in.jpg" alt="Inside the blending dome"><span class="gc"><b><span class="ar">داخل قبة الخلط</span><span class="en">Inside the blending dome</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="56" data-st="s5" data-aer="0" data-full="assets/a008.jpg"><img loading="lazy" src="assets/build/fin_a008.jpg" alt="Conveyors"><span class="gc"><b><span class="ar">سيور النقل</span><span class="en">Conveyors</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="57" data-st="s5" data-aer="0" data-full="assets/11_truck.jpg"><img loading="lazy" src="assets/build/fin_11_truck.jpg" alt="Loading and dispatch"><span class="gc"><b><span class="ar">التحميل والشحن</span><span class="en">Loading and dispatch</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="58" data-st="s5" data-aer="1" data-full="assets/mh/mh_aerial_night.jpg"><img loading="lazy" src="assets/mh/mh_aerial_night_t.jpg" alt="The plant at night, from above"><span class="gc"><b><span class="ar">المصنع ليلًا من أعلى</span><span class="en">The plant at night, from above</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="59" data-st="s5" data-aer="0" data-full="assets/mh/mh_night_skyline.jpg"><img loading="lazy" src="assets/mh/mh_night_skyline_t.jpg" alt="Site lights after dusk"><span class="gc"><b><span class="ar">أضواء الموقع بعد الغروب</span><span class="en">Site lights after dusk</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="60" data-st="s5" data-aer="0" data-full="assets/mh/mh_bluehour.jpg"><img loading="lazy" src="assets/mh/mh_bluehour_t.jpg" alt="Preheater tower at blue hour"><span class="gc"><b><span class="ar">برج التسخين في الساعة الزرقاء</span><span class="en">Preheater tower at blue hour</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="61" data-st="s5" data-aer="0" data-full="assets/mh/mh_conveyors.jpg"><img loading="lazy" src="assets/mh/mh_conveyors_t.jpg" alt="Conveyor and feed lines"><span class="gc"><b><span class="ar">خطوط النقل والتغذية</span><span class="en">Conveyor and feed lines</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="62" data-st="s5" data-aer="0" data-full="assets/mh/mh_bags.jpg"><img loading="lazy" src="assets/mh/mh_bags_t.jpg" alt="Egyptian Cement bags ready to ship"><span class="gc"><b><span class="ar">شكاير أسمنت المصريين جاهزة للشحن</span><span class="en">Egyptian Cement bags ready to ship</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button><button class="gi" data-i="63" data-st="s5" data-aer="1" data-full="assets/mh/mh_kiln_night.jpg"><img loading="lazy" src="assets/mh/mh_kiln_night_t.jpg" alt="The production line at night"><span class="gc"><b><span class="ar">قلب خط الإنتاج ليلًا</span><span class="en">The production line at night</span></b><span class="ar">المصنع اليوم</span><span class="en">The plant today</span></span></button></div>
     <div class="gmore rv"><button class="btn btn-o" id="gmore"><span class="ar">عرض كل الصور</span><span class="en">Show all photos</span></button></div>
+    <div class="ba" id="ba">
+      <div class="bahead">
+        <span class="eyebrow rv"><i></i><span class="ar">قبل… والآن</span><span class="en">Before &amp; now</span></span>
+        <h3 class="rv d1"><span class="ar">نفس المكان… من الإنشاء إلى التشغيل</span><span class="en">Same place, from construction to operation</span></h3>
+        <p class="rv d2"><span class="ar">كل صورة تدور لتكشف الأخرى: قبل… الآن. اضغط على أي صورة لتقلبها بنفسك.</span><span class="en">Each card turns to reveal its pair, before, now. Tap any card to flip it yourself.</span></p>
+      </div>
+      <div class="bagrid"><figure class="bac" data-k="0" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p1_before.jpg" alt="The land — and the plant — before"><span class="tg tb"><span class="ar">قبل · 2017</span><span class="en">Before · 2017</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p1_after.jpg" alt="The land — and the plant — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">الأرض… والمصنع</span><span class="en">The land, and the plant</span></figcaption></figure><figure class="bac" data-k="1" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p2_before.jpg" alt="The site from above — before"><span class="tg tb"><span class="ar">قبل · 2018</span><span class="en">Before · 2018</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p2_after.jpg" alt="The site from above — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">الموقع من أعلى</span><span class="en">The site from above</span></figcaption></figure><figure class="bac" data-k="2" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p3_before.jpg" alt="Clinker silos — before"><span class="tg tb"><span class="ar">قبل · 2018</span><span class="en">Before · 2018</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p3_after.jpg" alt="Clinker silos — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">سيلوهات الكلنكر</span><span class="en">Clinker silos</span></figcaption></figure><figure class="bac" data-k="3" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p4_before.jpg" alt="Silo & preheater tower — before"><span class="tg tb"><span class="ar">قبل · 2018</span><span class="en">Before · 2018</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p4_after.jpg" alt="Silo & preheater tower — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">السيلو وبرج التسخين</span><span class="en">Silo & preheater tower</span></figcaption></figure><figure class="bac" data-k="4" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p5_before.jpg" alt="The production line — before"><span class="tg tb"><span class="ar">قبل · 2018</span><span class="en">Before · 2018</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p5_after.jpg" alt="The production line — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">خط الإنتاج</span><span class="en">The production line</span></figcaption></figure><figure class="bac" data-k="5" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p6_before.jpg" alt="Bag-filter house — before"><span class="tg tb"><span class="ar">قبل · 2018</span><span class="en">Before · 2018</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p6_after.jpg" alt="Bag-filter house — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">مبنى الفلاتر</span><span class="en">Bag-filter house</span></figcaption></figure><figure class="bac" data-k="6" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p7_before.jpg" alt="Preheater cyclones — before"><span class="tg tb"><span class="ar">قبل · 2018</span><span class="en">Before · 2018</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p7_after.jpg" alt="Preheater cyclones — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">سيكلونات برج التسخين</span><span class="en">Preheater cyclones</span></figcaption></figure><figure class="bac" data-k="7" tabindex="0"><div class="flip"><div class="face fb"><img loading="lazy" src="assets/ba/p8_before.jpg" alt="From the first rig to the first light — before"><span class="tg tb"><span class="ar">قبل · 2017</span><span class="en">Before · 2017</span></span></div><div class="face fa"><img loading="lazy" src="assets/ba/p8_after.jpg" alt="From the first rig to the first light — after"><span class="tg ta"><span class="ar">الآن</span><span class="en">Now</span></span></div></div><figcaption><span class="ar">من أول حفّار… لأول نور</span><span class="en">From the first rig to the first light</span></figcaption></figure></div>
+    </div>
   </div>
 </section>
 <!-- ANNUAL TOTAL -->
@@ -1080,12 +1459,28 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
   </div>
 </section>
 
+<!-- PARTNERS IN SUCCESS -->
+<section id="partners" class="pis">
+  <img class="pis-bg" src="assets/rmx_plant.jpg" alt="" loading="lazy">
+  <div class="wrap">
+    <div class="pis-g">
+      <div class="pis-copy">
+        <span class="eyebrow rv"><i></i><span class="ar">مشروعاتنا</span><span class="en">Our projects</span></span>
+        <h2 class="rv d1"><span class="ar">المشاريع التي ساهم فيها أسمنت المصريين</span><span class="en">Projects built with Egyptian Cement</span></h2>
+        <p class="lead rv d2"><span class="ar">من محطات الخرسانة الجاهزة إلى مصانع المنتجات الخرسانية، يصل أسمنتنا السائب من مصنع جهينة إلى مواقع العمل بنفس المواصفة في كل شحنة.</span><span class="en">From ready-mix plants to precast factories, our bulk cement travels from the Gehina plant to the job site, to the same specification in every load.</span></p>
+      </div>
+      <div class="pis-wall rv d2" id="pisWall"><a class="pt pt1" data-k="quicrete" href="https://www.quicrete.com/" target="_blank" rel="noopener"><img class="plogo" src="assets/partners/quicrete.webp" alt="Quicrete Ready Mix Concrete" loading="lazy"><span class="pmeta"><small><span class="ar">خرسانة جاهزة · القاهرة</span><span class="en">Ready-mix concrete · Cairo</span></small><span class="pgo"><span class="ar">الموقع الرسمي</span><span class="en">Website</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span></span></a><div class="pt" data-k="nile"><span class="pword"><span class="ar">شركة النيل للخرسانة الجاهزة</span><span class="en">Nile Ready-Mix Concrete</span></span><span class="pmeta"><small><span class="ar">خرسانة جاهزة · قنا</span><span class="en">Ready-mix concrete · Qena</span></small></span></div><div class="pt" data-k="redsea"><span class="pword"><span class="ar">البحر الأحمر لصناعة المنتجات الخرسانية</span><span class="en">Red Sea Concrete Products</span></span><span class="pmeta"><small><span class="ar">منتجات خرسانية</span><span class="en">Precast concrete</span></small></span></div><div class="pt" data-k="abukhalif"><span class="pword"><span class="ar">أبو خليف للمنتجات الأسمنتية والخرسانية</span><span class="en">Abu Khalif Cement & Concrete Products</span></span><span class="pmeta"><small><span class="ar">منتجات خرسانية</span><span class="en">Precast concrete</span></small></span></div><div class="pt" data-k="malwany"><span class="pword"><span class="ar">الملواني للمنتجات الأسمنتية</span><span class="en">El Malwany Cement Products</span></span><span class="pmeta"><small><span class="ar">منتجات أسمنتية</span><span class="en">Cement products</span></small></span></div></div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
     <span class="eyebrow rv"><i></i><span class="ar">من نحن</span><span class="en">About us</span></span>
-    <h2 class="rv d1"><span class="ar">شركة وطنية… ومصنع بُني من الصفر في قلب الصعيد</span><span class="en">A national company — and a plant built from scratch in Upper Egypt</span></h2>
-    <p class="lead rv d2"><span class="ar">تأسست أسمنت المصريين عام 2016 لإنشاء مصنع أسمنت متكامل بالطريقة الجافة في المنطقة الصناعية غرب جهينة بسوهاج، بالشراكة التقنية مع Sinoma-CDI، لخدمة أسواق الصعيد والمشروعات القومية والتصدير.</span><span class="en">Egyptian Cement was founded in 2016 to build an integrated dry-process cement plant in the West Gehina Industrial Zone, Sohag, with technology partner Sinoma-CDI — serving Upper Egypt, national projects and export markets.</span></p>
+    <h2 class="rv d1"><span class="ar">شركة وطنية… ومصنع بُني من الصفر في قلب الصعيد</span><span class="en">A national company, and a plant built from scratch in Upper Egypt</span></h2>
+    <p class="lead rv d2"><span class="ar">تأسست أسمنت المصريين عام 2016 لإنشاء مصنع أسمنت متكامل بالطريقة الجافة في المنطقة الصناعية غرب جهينة بسوهاج، بالشراكة التقنية مع Sinoma-CDI، لخدمة أسواق الصعيد والمشروعات القومية والتصدير.</span><span class="en">Egyptian Cement was founded in 2016 to build an integrated dry-process cement plant in the West Gehina Industrial Zone, Sohag, with technology partner Sinoma-CDI, serving Upper Egypt, national projects and export markets.</span></p>
     <div class="tl rv" id="tl"><span class="fill"></span><span class="fut-line"></span>
       <div class="tls"><div class="dot"><i></i></div><b>2016</b><h4><span class="ar">التأسيس</span><span class="en">Founded</span></h4><p><span class="ar">تأسيس الشركة واختيار موقع غرب جهينة.</span><span class="en">Company founded; West Gehina site selected.</span></p></div>
       <div class="tls"><div class="dot"><i></i></div><b>2017</b><h4><span class="ar">بدء الإنشاء</span><span class="en">Construction begins</span></h4><p><span class="ar">تمهيد الأرض في يوليو، ثم الحفر والأساسات ومحطة الخرسانة.</span><span class="en">Site preparation in July, then excavation, foundations and the batching plant.</span></p></div>
@@ -1093,13 +1488,13 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
       <div class="tls"><div class="dot"><i></i></div><b>2019–20</b><h4><span class="ar">التركيبات</span><span class="en">Installation</span></h4><p><span class="ar">اكتمال الخط وتركيب معدات الطحن والنقل.</span><span class="en">Line completed; grinding and conveying equipment installed.</span></p></div>
       <div class="tls"><div class="dot"><i></i></div><b>2021</b><h4><span class="ar">التشغيل</span><span class="en">Start-up</span></h4><p><span class="ar">بدء التشغيل في أواخر 2021.</span><span class="en">Operations began in late 2021.</span></p></div>
       <div class="tls"><div class="dot"><i></i></div><b style="font-family:inherit"><span class="ar">تصدير</span><span class="en">Export</span></b><h4><span class="ar">النسر الأفريقي</span><span class="en">African Eagle</span></h4><p><span class="ar">أول شحنات التصدير بعلامة النسر الأفريقي.</span><span class="en">First export shipments under the African Eagle brand.</span></p><span class="pend"><span class="ar">التاريخ يُستكمل</span><span class="en">Date to confirm</span></span></div>
-      <div class="tls turn"><div class="dot"><i></i></div><b>2025</b><h4><span class="ar">م. عادل البدوي</span><span class="en">Eng. Adel Elbadawy</span></h4><p class="tp"><span class="ar">قيادة جديدة — رئيساً تنفيذياً للشركة</span><span class="en">New leadership — appointed CEO</span><br><em><span class="ar">نقطة تحوّل</span><span class="en">Turning point</span></em></p></div>
+      <div class="tls turn"><div class="dot"><i></i></div><b>2025</b><h4><span class="ar">م. عادل البدوي</span><span class="en">Eng. Adel Elbadawy</span></h4><p class="tp"><span class="ar">قيادة جديدة، رئيساً تنفيذياً للشركة</span><span class="en">New leadership, appointed CEO</span><br><em><span class="ar">نقطة تحوّل</span><span class="en">Turning point</span></em></p></div>
       <div class="tls fut"><div class="dot"><i></i></div><b>2026 +</b><h4><span class="ar">مستمرون</span><span class="en">And onward</span></h4><p><span class="ar">أسواق جديدة، كفاءة أعلى، وطاقة أنظف.</span><span class="en">New markets, higher efficiency, cleaner energy.</span></p></div>
     </div>
     <div class="mv">
       <div class="rv"><span class="mvi">◎</span><h4><span class="ar">رؤيتنا</span><span class="en">Vision</span></h4><p><span class="ar">الاسم الأكثر ثقة في الأسمنت ومواد البناء في مصر والمنطقة.</span><span class="en">The most trusted name in cement and building materials in Egypt and the region.</span></p></div>
       <div class="rv d1"><span class="mvi">◇</span><h4><span class="ar">قيمنا</span><span class="en">Values</span></h4><p><span class="ar">السلامة أولاً، جودة ثابتة، احترام البيئة، وشراكة طويلة مع عملائنا ومجتمعنا.</span><span class="en">Safety first, consistent quality, respect for the environment, long-term partnership with customers and community.</span></p></div>
-      <div class="rv d2"><span class="mvi">⚙</span><h4><span class="ar">شركاء التقنية</span><span class="en">Technology partners</span></h4><p><span class="ar">معدات وأنظمة تشغيل وتحول رقمي من شركاء عالميين.</span><span class="en">Equipment, control and digital systems from global partners.</span></p><div class="plogos"><div class="pl9"><span class="lg"><img src="assets/partners/sinoma.png" alt="Sinoma-CDI logo" loading="lazy"></span><b>Sinoma-CDI</b></div><div class="pl9"><span class="lg"><img src="assets/partners/flsmidth.png" alt="FLSmidth logo" loading="lazy"></span><b>FLSmidth</b></div><div class="pl9"><span class="lg"><img src="assets/partners/loesche.png" alt="Loesche logo" loading="lazy"></span><b>Loesche</b></div><div class="pl9"><span class="lg"><img src="assets/partners/siemens.svg" alt="Siemens logo" loading="lazy"></span><b>Siemens</b></div><div class="pl9"><span class="lg"><img src="assets/partners/sap.svg" alt="SAP logo" loading="lazy"></span><b>SAP</b></div></div></div>
+      <div class="rv d2"><span class="mvi">⚙</span><h4><span class="ar">شركاء التقنية</span><span class="en">Technology partners</span></h4><p><span class="ar">معدات وأنظمة تشغيل وتحول رقمي من شركاء عالميين.</span><span class="en">Equipment, control and digital systems from global partners.</span></p><div class="plogos"><a class="pl9" href="https://www.sinoma.cn/" target="_blank" rel="noopener" title="Sinoma-CDI"><span class="lg"><img src="assets/partners/sinoma.png" alt="Sinoma-CDI logo" loading="lazy"></span><b>Sinoma-CDI</b><span class="pgo" aria-hidden="true">↗</span></a><a class="pl9" href="https://www.flsmidth.com/" target="_blank" rel="noopener" title="FLSmidth"><span class="lg"><img src="assets/partners/flsmidth.png" alt="FLSmidth logo" loading="lazy"></span><b>FLSmidth</b><span class="pgo" aria-hidden="true">↗</span></a><a class="pl9" href="https://www.loesche.com/" target="_blank" rel="noopener" title="Loesche"><span class="lg"><img src="assets/partners/loesche.png" alt="Loesche logo" loading="lazy"></span><b>Loesche</b><span class="pgo" aria-hidden="true">↗</span></a><a class="pl9" href="https://www.siemens.com/" target="_blank" rel="noopener" title="Siemens"><span class="lg"><img src="assets/partners/siemens.svg" alt="Siemens logo" loading="lazy"></span><b>Siemens</b><span class="pgo" aria-hidden="true">↗</span></a><a class="pl9" href="https://www.sap.com/" target="_blank" rel="noopener" title="SAP"><span class="lg"><img src="assets/partners/sap.svg" alt="SAP logo" loading="lazy"></span><b>SAP</b><span class="pgo" aria-hidden="true">↗</span></a></div></div>
     </div>
   </div>
 </section>
@@ -1115,7 +1510,7 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
     <div>
       <span class="eyebrow rv"><i></i><span class="ar">كلمة الرئيس التنفيذي</span><span class="en">CEO message</span></span>
       <blockquote class="rv d1"><span class="ar">بنينا في سوهاج أحدث مصنع أسمنت في المنطقة. التزامنا اليوم أن نحوّل هذه القدرة إلى قيمة حقيقية: جودة ثابتة لعملائنا، وفرص عمل لأبناء الصعيد، وحضور متنامٍ في الأسواق الخارجية، ومساهمة ملموسة في بناء مصر.</span><span class="en">In Sohag we built the region's newest cement plant. Our commitment now is to turn that capacity into real value: consistent quality for our customers, jobs for Upper Egypt, a growing presence abroad, and a tangible contribution to building Egypt.</span></blockquote>
-      <div class="sig rv d2"><div><b><span class="ar">م. عادل البدوي</span><span class="en">Eng. Adel Elbadawy</span></b><span><span class="ar">الرئيس التنفيذي — أسمنت المصريين</span><span class="en">CEO — Egyptian Cement</span></span></div><span class="since"><span class="ar">منذ 2025</span><span class="en">Since 2025</span></span></div>
+      <div class="sig rv d2"><div><b><span class="ar">م. عادل البدوي</span><span class="en">Eng. Adel Elbadawy</span></b><span><span class="ar">الرئيس التنفيذي، أسمنت المصريين</span><span class="en">CEO, Egyptian Cement</span></span></div><span class="since"><span class="ar">منذ 2025</span><span class="en">Since 2025</span></span></div>
     </div>
   </div>
 </section>
@@ -1155,7 +1550,7 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
 <!-- PLANT -->
 <section id="plant" class="light2">
   <div class="wrap">
-    <span class="eyebrow rv"><i></i><span class="ar">مصنع جهينة — سوهاج</span><span class="en">Gehina plant — Sohag</span></span>
+    <span class="eyebrow rv"><i></i><span class="ar">مصنع جهينة، سوهاج</span><span class="en">Gehina plant, Sohag</span></span>
     <h2 class="rv d1"><span class="ar">المصنع بالأرقام</span><span class="en">The plant in numbers</span></h2>
     <p class="lead rv d2"><span class="ar">خط إنتاج واحد بالطريقة الجافة على مساحة مليون م² تقريباً، 400 كم جنوب القاهرة، بالمنطقة الصناعية غرب جهينة.</span><span class="en">A single dry-process line on ~1 million m², 400 km south of Cairo in the West Gehina Industrial Zone.</span></p>
     <div class="specs v8" id="specs">
@@ -1168,18 +1563,21 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
 </section>
 
 <!-- BAND -->
-<section class="band">
-  <img id="px" src="assets/13_night.jpg" alt="">
+<section class="band vb" aria-label="Vision">
+  <img id="px" src="assets/14_dusk.jpg" alt="مصنع أسمنت المصريين في جهينة عند الساعة الزرقاء">
   <div class="wrap">
-    <span class="eyebrow"><i></i><span class="ar">رؤيتنا</span><span class="en">Vision</span></span>
-    <h2><span class="ar">الاسم الأكثر ثقة في الأسمنت ومواد البناء في مصر والمنطقة</span><span class="en">The most trusted name in cement and building materials in Egypt and the region.</span></h2>
+    <div class="vbx">
+      <span class="vbk"><span class="ar">رؤيتنا</span><span class="en">Our vision</span></span>
+      <h2><span class="ar">الاسم <em>الأكثر ثقة</em> في الأسمنت ومواد البناء في مصر والمنطقة</span><span class="en">The <em>most trusted</em> name in cement and building materials in Egypt and the region.</span></h2>
+      <div class="vbm"><span class="ar">مصنع جهينة · سوهاج</span><span class="en">Gehina plant · Sohag</span><i></i><span class="num">6,000 <span class="ar">طن كلنكر يومياً</span><span class="en">t clinker/day</span></span></div>
+    </div>
   </div>
 </section>
 
-<!-- <div class="pr rv d0" data-cat="gen"><img src="assets/bags/bagc1.webp" alt=""><div class="tag">OPC</div><h3><span class="ar">أسمنت المصريين — بورتلاندي عادي</span><span class="en">Egyptian Cement — OPC</span></h3><p><span class="ar">للخرسانة المسلحة والإنشاءات العامة.</span><span class="en">For reinforced concrete and general construction.</span></p>
+<!-- <div class="pr rv d0" data-cat="gen"><img src="assets/bags/bagc1.webp" alt=""><div class="tag">OPC</div><h3><span class="ar">أسمنت المصريين، بورتلاندي عادي</span><span class="en">Egyptian Cement, OPC</span></h3><p><span class="ar">للخرسانة المسلحة والإنشاءات العامة.</span><span class="en">For reinforced concrete and general construction.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">رتبة المقاومة</span><span class="en">Strength class</span></span><b>—</b></div><div><span><span class="ar">التعبئة</span><span class="en">Packaging</span></span><b><span class="ar">سائب · 50 كجم · جامبو</span><span class="en">Bulk · 50 kg · Jumbo</span></b></div></div>
 <div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><a class="mini" href="#contact"><span class="ar">اطلب عرض سعر</span><span class="en">Get a quote</span></a></div></div>
-<div class="pr rv d1" data-cat="sr"><img src="assets/bags/bagc3.webp" alt=""><div class="tag">SRC</div><h3><span class="ar">أسمنت المصريين — مقاوم للكبريتات</span><span class="en">Egyptian Cement — Sulphate Resistant</span></h3><p><span class="ar">للأساسات والتربة والمياه عالية الكبريتات والمناطق الساحلية.</span><span class="en">For foundations, high-sulphate soil/water and coastal works.</span></p>
+<div class="pr rv d1" data-cat="sr"><img src="assets/bags/bagc3.webp" alt=""><div class="tag">SRC</div><h3><span class="ar">أسمنت المصريين، مقاوم للكبريتات</span><span class="en">Egyptian Cement, Sulphate Resistant</span></h3><p><span class="ar">للأساسات والتربة والمياه عالية الكبريتات والمناطق الساحلية.</span><span class="en">For foundations, high-sulphate soil/water and coastal works.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I – SR</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">رتبة المقاومة</span><span class="en">Strength class</span></span><b>—</b></div><div><span><span class="ar">التعبئة</span><span class="en">Packaging</span></span><b><span class="ar">سائب · 50 كجم · جامبو</span><span class="en">Bulk · 50 kg · Jumbo</span></b></div></div>
 <div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><a class="mini" href="#contact"><span class="ar">اطلب عرض سعر</span><span class="en">Get a quote</span></a></div></div>
 <div class="pr rv d2" data-cat="gen"><img src="assets/bags/bagc6.webp" alt=""><div class="tag">OPC</div><h3><span class="ar">النسر الصعيدي</span><span class="en">Nisr Al Saied</span></h3><p><span class="ar">علامة مخصصة لأسواق الصعيد.</span><span class="en">Built for Upper Egypt markets.</span></p>
@@ -1209,23 +1607,23 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
     </div>
     <div class="ppane on" id="pane-list">
       <div class="pfil rv" id="pfil"><button class="on" data-f="all"><span class="ar">الكل</span><span class="en">All</span></button><button data-f="gen"><span class="ar">بورتلاندي عادي</span><span class="en">Ordinary Portland</span></button><button data-f="sr"><span class="ar">مقاوم للكبريتات</span><span class="en">Sulphate resistant</span></button></div>
-      <div class="bags" id="pgrid"><article class="bag rv" data-cat="gen" style="--d:0ms"><div class="stage"><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc4.webp" alt="Egyptian Cement OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
-<div class="bi"><span class="tag">OPC</span><h3><span class="ar">أسمنت المصريين</span><span class="en">Egyptian Cement</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي — للخرسانة المسلحة والإنشاءات العامة.</span><span class="en">Ordinary Portland: reinforced concrete and general construction.</span></p>
+      <div class="bags" id="pgrid"><article class="bag rv" data-cat="gen" style="--d:0ms"><div class="stage"><span class="b360">360°</span><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc4.webp" alt="Egyptian Cement OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
+<div class="bi"><span class="tag">OPC</span><h3><span class="ar">أسمنت المصريين</span><span class="en">Egyptian Cement</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي، للخرسانة المسلحة والإنشاءات العامة.</span><span class="en">Ordinary Portland: reinforced concrete and general construction.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">العبوة</span><span class="en">Pack</span></span><b class="num">50 kg</b></div></div>
-<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="sr" style="--d:70ms"><div class="stage"><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc5.webp" alt="Egyptian Cement SRC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
-<div class="bi"><span class="tag">SRC</span><h3><span class="ar">أسمنت المصريين</span><span class="en">Egyptian Cement</span></h3><div class="grade"><b>42.5</b><em>N</em><small>SR5</small></div><p><span class="ar">مقاوم لأملاح الكبريتات — أساسات، صرف، منشآت معرضة للكبريتات.</span><span class="en">Sulphate resistant: foundations, sewage and sulphate-exposed works.</span></p>
+<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="sr" style="--d:70ms"><div class="stage"><span class="b360">360°</span><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc5.webp" alt="Egyptian Cement SRC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
+<div class="bi"><span class="tag">SRC</span><h3><span class="ar">أسمنت المصريين</span><span class="en">Egyptian Cement</span></h3><div class="grade"><b>42.5</b><em>N</em><small>SR5</small></div><p><span class="ar">مقاوم لأملاح الكبريتات، أساسات، صرف، منشآت معرضة للكبريتات.</span><span class="en">Sulphate resistant: foundations, sewage and sulphate-exposed works.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N-SR5</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">العبوة</span><span class="en">Pack</span></span><b class="num">50 kg</b></div></div>
-<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:140ms"><div class="stage"><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc3.webp" alt="Nesr El Saied OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
-<div class="bi"><span class="tag">OPC</span><h3><span class="ar">نسر الصعيد</span><span class="en">Nesr El Saied</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي — علامة مخصصة لأسواق الصعيد.</span><span class="en">Ordinary Portland, made for Upper Egypt markets.</span></p>
+<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:140ms"><div class="stage"><span class="b360">360°</span><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc3.webp" alt="Nesr El Saied OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
+<div class="bi"><span class="tag">OPC</span><h3><span class="ar">نسر الصعيد</span><span class="en">Nesr El Saied</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي، علامة مخصصة لأسواق الصعيد.</span><span class="en">Ordinary Portland, made for Upper Egypt markets.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">العبوة</span><span class="en">Pack</span></span><b class="num">50 kg</b></div></div>
-<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:210ms"><div class="stage"><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc2.webp" alt="El Assiouty OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
-<div class="bi"><span class="tag">OPC</span><h3><span class="ar">الأسيوطي</span><span class="en">El Assiouty</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي — لجميع أعمال البناء.</span><span class="en">Ordinary Portland for all construction work.</span></p>
+<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:210ms"><div class="stage"><span class="b360">360°</span><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc2.webp" alt="El Assiouty OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
+<div class="bi"><span class="tag">OPC</span><h3><span class="ar">الأسيوطي</span><span class="en">El Assiouty</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي، لجميع أعمال البناء.</span><span class="en">Ordinary Portland for all construction work.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">العبوة</span><span class="en">Pack</span></span><b class="num">50 kg</b></div></div>
-<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:280ms"><div class="stage"><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc1.webp" alt="El Sohagy OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
-<div class="bi"><span class="tag">OPC</span><h3><span class="ar">السوهاجي</span><span class="en">El Sohagy</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي — لجميع أعمال البناء.</span><span class="en">Ordinary Portland for all construction work.</span></p>
+<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:280ms"><div class="stage"><span class="b360">360°</span><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc1.webp" alt="El Sohagy OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
+<div class="bi"><span class="tag">OPC</span><h3><span class="ar">السوهاجي</span><span class="en">El Sohagy</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي، لجميع أعمال البناء.</span><span class="en">Ordinary Portland for all construction work.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">العبوة</span><span class="en">Pack</span></span><b class="num">50 kg</b></div></div>
-<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:350ms"><div class="stage"><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc6.webp" alt="Nesr El Masryeen OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
-<div class="bi"><span class="tag">OPC</span><h3><span class="ar">نسر المصريين</span><span class="en">Nesr El Masryeen</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي — جديد.</span><span class="en">Ordinary Portland, new brand.</span></p>
+<div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article><article class="bag rv" data-cat="gen" style="--d:350ms"><div class="stage"><span class="b360">360°</span><div class="tilt"><span class="glow"></span><img src="assets/bags/bagc6.webp" alt="Nesr El Masryeen OPC" loading="lazy"><span class="glare"></span></div><span class="shadow"></span></div>
+<div class="bi"><span class="tag">OPC</span><h3><span class="ar">نسر المصريين</span><span class="en">Nesr El Masryeen</span></h3><div class="grade"><b>42.5</b><em>N</em><small>CEM I</small></div><p><span class="ar">بورتلاندي عادي، جديد.</span><span class="en">Ordinary Portland, new brand.</span></p>
 <div class="specl"><div><span><span class="ar">النوع</span><span class="en">Type</span></span><b class="num">CEM I 42.5N</b></div><div><span><span class="ar">المواصفة</span><span class="en">Standard</span></span><b class="num">ES 4756-1</b></div><div><span><span class="ar">العبوة</span><span class="en">Pack</span></span><b class="num">50 kg</b></div></div>
 <div class="acts"><button class="mini g" data-toast="tds"><span class="ar">النشرة الفنية PDF</span><span class="en">Data sheet PDF</span></button><button class="mini" data-goprice><span class="ar">السعر</span><span class="en">Price</span></button></div></div></article></div>
     </div>
@@ -1259,7 +1657,7 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
             <option value="exp" data-ar="شحنات تصدير" data-en="Export shipments"></option>
           </select></div>
         <div class="rec" id="recBox"></div>
-        <p class="fine"><span class="ar">توصية استرشادية؛ يُرجع لمهندس الموقع ولفريق الدعم الفني لدينا.</span><span class="en">Guidance only — consult your site engineer and our technical support team.</span></p>
+        <p class="fine"><span class="ar">توصية استرشادية؛ يُرجع لمهندس الموقع ولفريق الدعم الفني لدينا.</span><span class="en">Guidance only, consult your site engineer and our technical support team.</span></p>
       </div>
       <div class="tool rv d1">
         <span class="eyebrow"><i></i><span class="ar">حاسبة الأسمنت</span><span class="en">Cement calculator</span></span>
@@ -1282,7 +1680,7 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
 <!-- QUALITY -->
 <section id="quality" class="light2">
   <div class="wrap qgrid">
-    <div class="qimg q3d orbit rv" id="q3d"><span class="qhint">360°</span><div class="disc"></div><div class="orb"><div class="seal"><svg viewBox="0 0 100 100"><defs><path id="sc" d="M50,50 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs><text><textPath href="#sc">EGYPTIAN STANDARD · ES 4756-1 · QUALITY TESTED · </textPath></text></svg><div><b>42.5<em>N</em></b><small>ES 4756-1</small></div></div></div><div class="qtag"><b>ES 4756-1</b><span class="ar">مطابق للمواصفة المصرية</span><span class="en">Egyptian standard compliant</span></div></div>
+    <div class="qimg q3x rv" id="q3x"><span class="qhint">360° · <span class="ar">اسحب أو اضغط على شكارة</span><span class="en">drag or tap a bag</span></span><div class="qtag"><b>ES 4756-1</b><span class="ar">مطابق للمواصفة المصرية</span><span class="en">Egyptian standard compliant</span></div></div>
     <div>
       <span class="eyebrow rv"><i></i><span class="ar">الجودة والشهادات</span><span class="en">Quality & certification</span></span>
       <h2 class="rv d1"><span class="ar">جودة تُقاس في كل مرحلة</span><span class="en">Quality measured at every stage</span></h2>
@@ -1293,7 +1691,7 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
         <div class="cert"><div class="seal">؟</div><b>ISO 45001</b><span class="ar">السلامة المهنية</span><span class="en">OH&S</span></div>
         <div class="cert"><div class="seal">؟</div><b>ES 4756-1</b><span class="ar">المواصفة المصرية</span><span class="en">Egyptian standard</span></div>
       </div>
-      <div class="pend"><span class="ar">خانات فارغة: تُعرض فقط الشهادات الحاصلة عليها الشركة فعلياً — بانتظار تأكيد الجودة</span><span class="en">Placeholders: show only certificates actually held — awaiting Quality confirmation</span></div>
+      <div class="pend"><span class="ar">خانات فارغة: تُعرض فقط الشهادات الحاصلة عليها الشركة فعلياً، بانتظار تأكيد الجودة</span><span class="en">Placeholders: show only certificates actually held, awaiting Quality confirmation</span></div>
     </div>
   </div>
 </section>
@@ -1302,11 +1700,11 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
 <section id="esg" class="dark">
   <div class="wrap">
     <span class="eyebrow rv"><i></i><span class="ar">الاستدامة والسلامة والمجتمع</span><span class="en">Sustainability, safety & community</span></span>
-    <h2 class="rv d1"><span class="ar">ننتج أسمنتاً… ونحترم الأرض والناس</span><span class="en">Making cement — responsibly</span></h2>
+    <h2 class="rv d1"><span class="ar">ننتج أسمنتاً… ونحترم الأرض والناس</span><span class="en">Making cement, responsibly</span></h2>
     <div class="esg">
-      <div class="ec rv"><img src="assets/14_dusk.jpg" alt="Preheater tower — the tallest point of the plant"><div class="in2"><span class="eyebrow"><i></i><span class="ar">البيئة</span><span class="en">Environment</span></span><h3><span class="ar">انبعاثات أقل</span><span class="en">Lower emissions</span></h3><p><span class="ar">برج التسخين المسبق — أعلى نقطة في المصنع — بتقنية جافة موفرة للطاقة، وفلاتر للتحكم في الانبعاثات والأتربة.</span><span class="en">The preheater tower — the plant's tallest point — runs an energy-efficient dry process with filters controlling emissions and dust.</span></p><ul><li><span class="ar">كفاءة الطاقة الحرارية والكهربية</span><span class="en">Thermal & electrical efficiency</span></li><li><span class="ar">خطة لاستخدام الوقود البديل</span><span class="en">Alternative-fuel plan</span></li></ul></div></div>
+      <div class="ec rv"><img src="assets/mh/mh_bluehour.jpg" alt="Preheater tower — the tallest point of the plant"><div class="in2"><span class="eyebrow"><i></i><span class="ar">البيئة</span><span class="en">Environment</span></span><h3><span class="ar">انبعاثات أقل</span><span class="en">Lower emissions</span></h3><p><span class="ar">برج التسخين المسبق، أعلى نقطة في المصنع، بتقنية جافة موفرة للطاقة، وفلاتر للتحكم في الانبعاثات والأتربة.</span><span class="en">The preheater tower, the plant's tallest point, runs an energy-efficient dry process with filters controlling emissions and dust.</span></p><ul><li><span class="ar">كفاءة الطاقة الحرارية والكهربية</span><span class="en">Thermal & electrical efficiency</span></li><li><span class="ar">خطة لاستخدام الوقود البديل</span><span class="en">Alternative-fuel plan</span></li></ul></div></div>
       <div class="ec rv d1"><img src="assets/build/safety.jpg" alt="EC safety helmets"><div class="in2"><span class="eyebrow"><i></i><span class="ar">السلامة</span><span class="en">Safety</span></span><h3><span class="ar">السلامة أولاً</span><span class="en">Safety first</span></h3><p><span class="ar">سياسة صحة وسلامة مهنية تغطي العاملين والمقاولين والزائرين والنقل.</span><span class="en">An OH&S policy covering employees, contractors, visitors and transport.</span></p><ul><li><span class="ar">تدريب مستمر وتصاريح عمل</span><span class="en">Training & permits to work</span></li><li><span class="ar">سلامة الطرق وأسطول النقل</span><span class="en">Road & fleet safety</span></li></ul></div></div>
-      <div class="ec rv d2"><img src="assets/a119.jpg" alt="Sunrise over Sohag"><div class="in2"><span class="eyebrow"><i></i><span class="ar">المجتمع</span><span class="en">Community</span></span><h3><span class="ar">شريك لسوهاج</span><span class="en">A partner to Sohag</span></h3><span class="sun9"><i></i><span class="ar">المصنع… شمس سوهاج</span><span class="en">The plant — Sohag's sun</span></span><p><span class="ar">فرص عمل مباشرة وغير مباشرة لأبناء الصعيد ودعم للمجتمع المحيط.</span><span class="en">Direct and indirect jobs for Upper Egypt and support for nearby communities.</span></p><ul><li><span class="ar">التوظيف والتدريب المحلي</span><span class="en">Local hiring & training</span></li><li><span class="ar">مبادرات مجتمعية</span><span class="en">Community initiatives</span></li></ul></div></div>
+      <div class="ec rv d2"><img src="assets/a119.jpg" alt="Sunrise over Sohag"><div class="in2"><span class="eyebrow"><i></i><span class="ar">المجتمع</span><span class="en">Community</span></span><h3><span class="ar">شريك لسوهاج</span><span class="en">A partner to Sohag</span></h3><span class="sun9"><i></i><span class="ar">المصنع… شمس سوهاج</span><span class="en">The plant, Sohag's sun</span></span><p><span class="ar">فرص عمل مباشرة وغير مباشرة لأبناء الصعيد ودعم للمجتمع المحيط.</span><span class="en">Direct and indirect jobs for Upper Egypt and support for nearby communities.</span></p><ul><li><span class="ar">التوظيف والتدريب المحلي</span><span class="en">Local hiring & training</span></li><li><span class="ar">مبادرات مجتمعية</span><span class="en">Community initiatives</span></li></ul></div></div>
     </div>
     <div class="kpis rv">
       <div><b>—</b><span class="ar">كجم CO₂ / طن أسمنت</span><span class="en">kg CO₂ / t cement</span></div>
@@ -1322,7 +1720,7 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
   <div class="wrap appg">
     <div>
       <span class="eyebrow rv"><i></i><span class="ar">تطبيق المبيعات</span><span class="en">Sales app</span></span>
-      <h2 class="rv d1"><span class="ar">تطبيق EC — طلبك في جيبك</span><span class="en">The EC app — your orders, in your pocket</span></h2>
+      <h2 class="rv d1"><span class="ar">تطبيق EC، طلبك في جيبك</span><span class="en">The EC app, your orders, in your pocket</span></h2>
       <p class="lead rv d2"><span class="ar">تطبيق المبيعات الخاص بعملاء وموزعي أسمنت المصريين، مستوحى من هوية الشعار.</span><span class="en">Egyptian Cement's sales app for customers and distributors, designed from our logo identity.</span></p>
       <div class="feat f8 rv d2" id="feat">
         <button data-s="0"><b><span class="ar">احجز واطلب</span><span class="en">Book & order</span></b><span class="ar">سائب أو معبأ، وموعد تحميل</span><span class="en">Bulk or bagged, with a loading slot</span><em></em></button>
@@ -1372,10 +1770,10 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
     <h2 class="rv d1"><span class="ar">المصنع والمكاتب والموزعون المعتمدون</span><span class="en">Plant, offices and authorised dealers</span></h2>
     <div class="dl">
       <div class="side rv">
-        <label style="font-size:.85rem;color:var(--mute)"><span class="ar">اختر الموقع — الخريطة تنتقل إليه</span><span class="en">Pick a location — the map moves to it</span></label>
+        <label style="font-size:.85rem;color:var(--mute)"><span class="ar">اختر الموقع، الخريطة تنتقل إليه</span><span class="en">Pick a location, the map moves to it</span></label>
         <select id="gov" aria-hidden="true" tabindex="-1"></select><div class="gtabs" id="gtabs"></div>
         <div class="pl" id="plist"></div>
-        <div class="pend"><span class="ar">عنوان مكتب أسيوط والموزعون المعتمدون يُستكملون من إدارة المبيعات</span><span class="en">Assiut office address and authorised dealers to be supplied by Sales</span></div>
+        <div class="pend"><span class="ar">قائمة الموزعين المعتمدين تُستكمل من إدارة المبيعات</span><span class="en">Authorised dealer list to be supplied by Sales</span></div>
       </div>
       <div class="egy rv d1"><span class="mtag" id="dtag"><i></i><span>مصنع أسمنت المصريين — جهينة</span></span><iframe id="dmap" loading="lazy" title="map" style="width:100%;height:100%;min-height:440px;border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2500!2d31.3191341!3d26.6561948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1445eb890bc0e7e7:0x3f2438a1dc3a24b9!2s%D9%85%D8%B5%D9%86%D8%B9%20%D8%A3%D8%B3%D9%85%D9%86%D8%AA%20%D8%A7%D9%84%D9%85%D8%B5%D8%B1%D9%8A%D9%8A%D9%86%20%D8%AC%D9%87%D9%8A%D9%86%D8%A9!5e1!0!3m2!1sar!2seg!4v1759900000000"></iframe></div>
     </div>
@@ -1391,8 +1789,8 @@ html[lang=en] .hero h1.bigname .sub{letter-spacing:-.01em;word-spacing:.04em}
       <div class="rv">
         <div class="job"><div><b><span class="ar">مهندس عمليات إنتاج</span><span class="en">Production process engineer</span></b><span><span class="ar">المصنع · سوهاج · دوام كامل</span><span class="en">Plant · Sohag · Full-time</span></span></div><a class="mini" href="#apply"><span class="ar">تقدّم</span><span class="en">Apply</span></a></div>
         <div class="job"><div><b><span class="ar">فني صيانة ميكانيكية</span><span class="en">Mechanical maintenance technician</span></b><span><span class="ar">المصنع · سوهاج · دوام كامل</span><span class="en">Plant · Sohag · Full-time</span></span></div><a class="mini" href="#apply"><span class="ar">تقدّم</span><span class="en">Apply</span></a></div>
-        <div class="job"><div><b><span class="ar">أخصائي مبيعات — الصعيد</span><span class="en">Sales specialist — Upper Egypt</span></b><span><span class="ar">المبيعات · أسيوط/سوهاج</span><span class="en">Sales · Assiut/Sohag</span></span></div><a class="mini" href="#apply"><span class="ar">تقدّم</span><span class="en">Apply</span></a></div>
-        <div class="pend"><span class="ar">وظائف توضيحية — تُستبدل بالشواغر الفعلية من الموارد البشرية</span><span class="en">Illustrative roles — replace with actual vacancies from HR</span></div>
+        <div class="job"><div><b><span class="ar">أخصائي مبيعات، الصعيد</span><span class="en">Sales specialist, Upper Egypt</span></b><span><span class="ar">المبيعات · أسيوط/سوهاج</span><span class="en">Sales · Assiut/Sohag</span></span></div><a class="mini" href="#apply"><span class="ar">تقدّم</span><span class="en">Apply</span></a></div>
+        <div class="pend"><span class="ar">وظائف توضيحية، تُستبدل بالشواغر الفعلية من الموارد البشرية</span><span class="en">Illustrative roles, replace with actual vacancies from HR</span></div>
         <div class="perks">
           <div><b><span class="ar">برنامج حديثي التخرج</span><span class="en">Graduate programme</span></b><span class="ar">تدريب عملي داخل المصنع</span><span class="en">Hands-on training at the plant</span></div>
           <div><b><span class="ar">تدريب الطلاب</span><span class="en">Student internships</span></b><span class="ar">صيفي لطلاب الهندسة</span><span class="en">Summer, for engineering students</span></div>
@@ -1546,7 +1944,7 @@ cM.onchange=calc;cV.oninput=calc;
 window.EMB=(ll,z,t,fid,nm)=>{const [la,lo]=ll.split(','),d={13:20000,14:9000,15:4500,16:2500,17:1400}[z]||3000;return fid?`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d${d}!2d${lo}!3d${la}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${fid}!2s${encodeURIComponent(nm)}!5e${t==='k'?1:0}!0!3m2!1s${document.documentElement.lang}!2seg!4v1759900000000`:`https://maps.google.com/maps?q=${ll}&ll=${ll}&z=${z}&t=${t}&hl=${document.documentElement.lang}&output=embed`};
  const LOC=[{g:['سوهاج — المصنع','Sohag — Plant'],items:[[['مصنع أسمنت المصريين — جهينة','Egyptian Cement plant — Gehina'],['المنطقة الصناعية غرب جهينة، طريق رئيس المتوحدين، سوهاج','West Gehina Industrial Zone, Sohag'],'26.6561948,31.3191341',16,'k','0x1445eb890bc0e7e7:0x3f2438a1dc3a24b9','مصنع أسمنت المصريين جهينة']]},
  {g:['القاهرة — المقر الرئيسي','Cairo — Head office'],items:[[['المقر الرئيسي','Head office'],['43-43أ طريق العين السخنة، القطامية، التجمع الثالث، القاهرة','43-43A Ain Sokhna Rd, Katameya, 3rd Settlement, Cairo'],'29.9728486,31.3773854',17,'m','0x14583b3719453583:0xf29099b6f74d59','اسمنت المصريين']]},
- {g:['أسيوط','Assiut'],items:[[['مكتب أسيوط','Assiut office'],['مدينة أسيوط — العنوان التفصيلي يُستكمل من المبيعات','Assiut city — exact address from Sales'],'27.1809,31.1837',13,'m']]}];
+ {g:['أسيوط','Assiut'],items:[[['مكتب أسيوط','Assiut office'],['قسم أول أسيوط، مدينة أسيوط','First District, Assiut city'],'27.184429,31.185822',17,'m']]}];
  const gv=document.getElementById('gov');
  function fillGov(){const v=gv.value||0;gv.innerHTML=LOC.map((l,i)=>`<option value="${i}">${AR()?l.g[0]:l.g[1]}</option>`).join('');gv.value=v;showGov()}
  function showGov(){const l=LOC[+gv.value||0];const gt=document.getElementById("gtabs");if(gt){gt.innerHTML=LOC.map((x,i)=>`<button class="lc9${i==(+gv.value||0)?" on":""}" data-i="${i}"><b>${AR()?x.g[0]:x.g[1]}</b><span>${AR()?x.items[0][1][0]:x.items[0][1][1]}</span></button>`).join("");gt.querySelectorAll("button").forEach(b=>b.onclick=()=>{gv.value=b.dataset.i;showGov()})}document.getElementById('plist').innerHTML=l.items.map(it=>`<div class="it9"><b>${AR()?it[0][0]:it[0][1]}</b><span>${AR()?it[1][0]:it[1][1]}</span></div>`).join('');
@@ -1780,5 +2178,35 @@ try{const s=localStorage.getItem('ec-lang');if(s)setLang(s);else renderExport()}
  window.__MAPU=MAPU;
 })();
 </script>
+
+
+<script>/* v10 before/after */(()=>{const g=document.querySelector('#ba .bagrid');if(!g)return;const cs=[...g.querySelectorAll('.bac')];const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+cs.forEach((c,i)=>{if(i%2)c.classList.add('af');c.addEventListener('click',()=>{c.classList.toggle('af');c.dataset.hold=Date.now()});c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click()}});
+ if(matchMedia('(hover:hover)').matches){c.addEventListener('mouseenter',()=>{c.dataset.over=1});c.addEventListener('mouseleave',()=>{delete c.dataset.over})}});
+let vis=false;new IntersectionObserver(es=>{vis=es[0].isIntersecting},{threshold:.15}).observe(g);
+if(!RM)setInterval(()=>{if(!vis||document.hidden)return;const now=Date.now();cs.forEach((c,i)=>{if(c.dataset.over||(c.dataset.hold&&now-c.dataset.hold<6000))return;setTimeout(()=>c.classList.toggle('af'),i*110)})},3600);
+})();</script>
+
+<script src="assets/js/three.min.js" defer></script>
+<script src="assets/js/roomenv.js" defer></script>
+<script src="assets/js/ec3d-tex.js" defer></script>
+<script src="assets/js/ec3d.js" defer></script>
+<script>/* v11 */document.addEventListener('DOMContentLoaded',()=>{const D=document,RM=matchMedia('(prefers-reduced-motion: reduce)').matches,AR=()=>D.documentElement.lang!=='en';
+const has3d=()=>window.EC3D&&EC3D.viewer;
+/* hero spec + shelf */
+const sp=D.getElementById('hspec'),sh=D.getElementById('hshelf');
+setTimeout(()=>{sp&&sp.classList.add('go');sh&&sh.classList.add('go')},RM?0:150);
+if(sh){const bs=[...sh.querySelectorAll('.sb')],n=D.getElementById('hsn'),t=D.getElementById('hst'),lb=sh.querySelector('.hslbl');let k=-1,hold=0;
+ const show=i=>{bs.forEach((b,j)=>b.classList.toggle('on',j===i));lb.classList.add('sw');setTimeout(()=>{n.textContent=AR()?bs[i].dataset.ar:bs[i].dataset.en;t.textContent=bs[i].dataset.t;lb.classList.remove('sw')},280)};
+ setTimeout(()=>{sh.classList.add('idle');const st=()=>{if(Date.now()<hold)return;k=(k+1)%bs.length;show(k)};st();if(!RM)setInterval(()=>{if(!D.hidden)st()},2600)},RM?50:3600);
+ bs.forEach((b,i)=>{b.addEventListener('mouseenter',()=>{hold=Date.now()+4000;k=i;show(i)});b.addEventListener('click',()=>{has3d()&&EC3D.viewer.open(b.dataset.k)})});}
+/* products: open the WebGL viewer instead of the old spotlight */
+const pg=D.getElementById('pgrid');
+if(pg)pg.addEventListener('click',e=>{if(e.target.closest('.acts,button,a'))return;const c=e.target.closest('.bag');if(!c||!has3d())return;const im=c.querySelector('img');const m=/(bagc\d)/.exec(im&&im.src||'');if(!m)return;e.stopPropagation();e.preventDefault();EC3D.viewer.open(m[1])},true);
+/* quality orbit */
+const q=D.getElementById('q3x');if(q){const go=()=>{if(window.EC3D)EC3D.orbit(q);else setTimeout(go,200)};go()}
+/* finale rotation */
+D.querySelectorAll('.finale .fstk').forEach((st,si)=>{const ims=[...st.querySelectorAll('img')];if(ims.length<2||RM)return;let i=0;setTimeout(()=>setInterval(()=>{if(D.hidden)return;ims[i].classList.remove('on');i=(i+1)%ims.length;ims[i].classList.add('on')},5200),si*2600)});
+});</script>
 </body>
 </html>

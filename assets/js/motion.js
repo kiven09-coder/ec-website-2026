@@ -42,7 +42,7 @@
   par('#partners .pis-bg', -8, 8);
 
   // project tiles: gentle stagger as the wall enters
-  const tiles = gsap.utils.toArray('#pisWall .pt');
+  const tiles = gsap.utils.toArray('#pisWall .pj');
   const run = els => ({ onStart: () => els.forEach(e => e.classList.add('gs-run')), onComplete: () => { els.forEach(e => e.classList.remove('gs-run')); gsap.set(els, { clearProps: 'transform,opacity' }); } });
   if (tiles.length) gsap.from(tiles, { y: 26, opacity: 0, duration: .8, ease: 'power3.out', stagger: .06, ...run(tiles),
     scrollTrigger: { trigger: '#pisWall', start: 'top 82%', once: true } });

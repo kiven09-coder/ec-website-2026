@@ -1,4 +1,4 @@
-/* EC 3D (v13.1) — three.js r159 classic build
+/* EC 3D (v13.2) — three.js r159 classic build
    - EC3D.stage(host)  : product-sheet stage, the official bag mockup as a real 3D bag,
                          centred and turned to a fixed 3/4 angle (drag to turn, it settles back)
    - EC3D.orbit(host)  : quality section, cast-cement floor engraved 42.5N with OPC + SR5 orbiting
@@ -159,9 +159,13 @@
     lip.rotation.x = Math.PI / 2; lip.position.y = .101; sc.add(lip);
     build(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
 
+    // the same official mockup pictures as the product cards (billboards that always face the camera)
     const B = ['bagc4', 'bagc5'].map(k => {
-      const m = bag(k); m.scale.setScalar(.72); sc.add(m);
-      const s = blob(.45); s.scale.set(.62, .3, 1); s.position.y = .102; sc.add(s); m.userData.sh = s; return m;
+      const t = loader.load(`assets/products/${k}.webp`); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 8;
+      const h = .82, w = h * .604;
+      const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ map: t, transparent: true, alphaTest: .02, toneMapped: false }));
+      m.userData.k = k; sc.add(m);
+      const s = blob(.45); s.scale.set(w * 1.25, .3, 1); s.position.y = .102; sc.add(s); m.userData.sh = s; return m;
     });
     let th = .5, sp = RM ? 0 : .0045, v = 0, drag = false, lx = 0, vis = false, raf = 0;
     const ray = new T.Raycaster(), ptr = new T.Vector2();
@@ -178,9 +182,8 @@
       if (!drag) { v *= .94; th += sp + v; }
       B.forEach((m, i) => {
         const a = th + i * Math.PI, R = 1.0;
-        m.position.set(Math.sin(a) * R, .1 + .39 + Math.sin(t / 900 + i * 2) * .012, Math.cos(a) * R);
-        // each bag faces the camera at the same 3/4 angle as in the product sheet
-        m.rotation.set(0, Math.atan2(cam.position.x - m.position.x, cam.position.z - m.position.z) + REST, 0);
+        m.position.set(Math.sin(a) * R, .1 + .41 + Math.sin(t / 900 + i * 2) * .012, Math.cos(a) * R);
+        m.rotation.set(0, Math.atan2(cam.position.x - m.position.x, cam.position.z - m.position.z), 0);
         m.userData.sh.position.x = m.position.x; m.userData.sh.position.z = m.position.z;
       });
       lip.material.opacity = .55 + .25 * Math.sin(t / 700);

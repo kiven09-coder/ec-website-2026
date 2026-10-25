@@ -1,4 +1,4 @@
-/* Egyptian Cement · products (v13.1)
+/* Egyptian Cement · products (v13.2)
    Official 2D bag mockups + descriptions from "EC Products.pdf".
    ECP.open(key) opens the product sheet; ECP.data holds the copy (AR/EN). */
 (function () {
@@ -75,8 +75,6 @@
   function show(k, dir) {
     V.idx = ORDER.indexOf(k); V.key = k; fill(k);
     const info = V.el.querySelector('.psinfo'); info.classList.remove('sw'); void info.offsetWidth; info.classList.add('sw');
-    if (!V.st3 && window.EC3D && EC3D.stage) { V.st3 = EC3D.stage(V.el.querySelector('.psstage')); if (V.st3) V.el.classList.add('ps3d'); }
-    if (V.st3) { V.st3.show(k, dir); V.st3.start(); V.img.src = img(k); return; }
     V.img.classList.remove('in'); V.img.style.setProperty('--dx', (dir || 0) * 40 + 'px'); void V.img.offsetWidth;
     V.img.src = img(k); V.img.classList.add('in');
   }
@@ -86,7 +84,7 @@
     V.el.classList.add('on'); document.documentElement.classList.add('v3lock'); show(k, 0);
     setTimeout(() => V.el.querySelector('.psx').focus(), 50);
   }
-  function close() { if (V.st3) V.st3.stop(); V.el.classList.remove('on'); document.documentElement.classList.remove('v3lock'); }
+  function close() { V.el.classList.remove('on'); document.documentElement.classList.remove('v3lock'); }
   // re-render text on language switch
   new MutationObserver(() => { if (V.el && V.el.classList.contains('on')) fill(V.key); }).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
